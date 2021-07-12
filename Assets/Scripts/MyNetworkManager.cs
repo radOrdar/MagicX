@@ -1,15 +1,15 @@
-using Mirror;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using Mirror;
 
 /*
 	Documentation: https://mirror-networking.gitbook.io/docs/components/network-manager
 	API Reference: https://mirror-networking.com/docs/api/Mirror.NetworkManager.html
 */
 
-public class NewNetworkManager : NetworkManager {
-    
+public class MyNetworkManager : NetworkManager {
+
     [SerializeField] private Texture2D cursorTexture;
-    
     #region Unity Callbacks
 
     public override void OnValidate() {
