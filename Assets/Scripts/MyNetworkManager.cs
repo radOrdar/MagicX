@@ -158,7 +158,7 @@ public class MyNetworkManager : NetworkManager {
     /// <param name="conn">Connection to the server.</param>
     public override void OnClientConnect(NetworkConnection conn) {
         base.OnClientConnect(conn);
-        Cursor.SetCursor(cursorTexture, Vector2.zero, CursorMode.Auto);
+        Cursor.SetCursor(cursorTexture, new Vector2(cursorTexture.width/2, cursorTexture.height/2), CursorMode.Auto);
     }
 
     /// <summary>
