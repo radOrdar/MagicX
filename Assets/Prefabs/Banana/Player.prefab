@@ -900,9 +900,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  projSpeed: 15
+  projSpeed: 20
   coolDownTime: 3
-  bulletsPool: 5
+  bulletsPool: 2
   spawnProjTrans: {fileID: 5014805027652582736}
   projectilePrefab: {fileID: 8779774710099683455, guid: 0dc2297b6afe2024e8c91717c80a72a3, type: 3}
   handAndGunToRotate: {fileID: 7250171379588898900}

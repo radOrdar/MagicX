@@ -8,8 +8,7 @@ using Mirror;
 */
 
 public class MyNetworkManager : NetworkManager {
-
-    [SerializeField] private Texture2D cursorTexture;
+    
     #region Unity Callbacks
 
     public override void OnValidate() {
@@ -158,7 +157,6 @@ public class MyNetworkManager : NetworkManager {
     /// <param name="conn">Connection to the server.</param>
     public override void OnClientConnect(NetworkConnection conn) {
         base.OnClientConnect(conn);
-        Cursor.SetCursor(cursorTexture, new Vector2(cursorTexture.width/2, cursorTexture.height/2), CursorMode.Auto);
     }
 
     /// <summary>
