@@ -1856,7 +1856,6 @@ MonoBehaviour:
   autoCreatePlayer: 1
   playerSpawnMethod: 1
   spawnPrefabs:
-  - {fileID: 8482846475874452489, guid: 06ec809adb517d948a82f52dc0d72d37, type: 3}
   - {fileID: 8779774710099683455, guid: 0dc2297b6afe2024e8c91717c80a72a3, type: 3}
   cursorTexture: {fileID: 2800000, guid: bbd414c063dbe5446a0937678f5544f1, type: 3}
 --- !u!4 &1957698916

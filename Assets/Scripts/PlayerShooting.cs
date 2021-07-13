@@ -15,7 +15,7 @@ public class PlayerShooting : NetworkBehaviour {
     [SerializeField] private Image magazineReloadIndicator;
     [SerializeField] private GameObject bulletIndicatorPanel;
 
-    [SerializeField] private GameObject shootEffectPrefab;
+    [SerializeField] private ParticleSystem shootEffect;
     
     private Camera mainCamera;
     
@@ -86,6 +86,11 @@ public class PlayerShooting : NetworkBehaviour {
         }
     }
 
+    [ClientRpc]
+    private void PlayShootEffect() {
+        shootEffect.Play();
+    }
+
     #region Server
 
     [Command]
@@ -95,9 +100,8 @@ public class PlayerShooting : NetworkBehaviour {
         GameObject proj = Instantiate(projectilePrefab, spawnProjTrans.position, Quaternion.identity);
         proj.GetComponent<Projectile>().SetInitialSpeed(spawnProjTrans.right * projSpeed);
         NetworkServer.Spawn(proj, connectionToClient);
-
-        GameObject shootEffect = Instantiate(shootEffectPrefab, spawnProjTrans.position, spawnProjTrans.rotation);
-        NetworkServer.Spawn(shootEffect);
+        
+        PlayShootEffect();
         if (currentBullets <= 0) {
             StartCoroutine(ReloadMagazineRoutine());
         }
