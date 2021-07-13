@@ -15,7 +15,7 @@ public class PlayerMovement : NetworkBehaviour {
     [SerializeField] private float jumpSpeed;
 
     [Header("Components")]
-    [SerializeField] private Rigidbody2D myRigidbody;
+    [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Collider2D myCollider;
     [SerializeField] private Animator animator;
 
@@ -32,8 +32,9 @@ public class PlayerMovement : NetworkBehaviour {
 
     private Coroutine updateGroundRoutine;
 
-    [ClientCallback]
+    // [ClientCallback]
     private void OnCollisionEnter2D(Collision2D other) {
+        if (!hasAuthority) { return; }
         if (other.collider.CompareTag("Floor")) {
             if (updateGroundRoutine != null) {
                 StopCoroutine(updateGroundRoutine);
@@ -45,11 +46,23 @@ public class PlayerMovement : NetworkBehaviour {
         }
     }
 
-    [ClientCallback]
+    // [ClientCallback]
     private void OnCollisionExit2D(Collision2D other) {
+        if (!hasAuthority) { return; }
         if (other.collider.CompareTag("Floor")) {
             updateGroundRoutine = StartCoroutine(nameof(UpdateGroundedFlagRoutine));
         }
+    }
+    
+    // [ClientCallback]
+    private void FixedUpdate() {
+        if (!hasAuthority) { return; }
+        Move();
+        Jump();
+        // Shift();
+        Flip();
+        animator.SetFloat("HorizontalSpeed", Mathf.Abs(rb.velocity.x));
+        animator.SetFloat("VerticalSpeed", rb.velocity.y);
     }
 
     private IEnumerator UpdateGroundedFlagRoutine() {
@@ -70,20 +83,11 @@ public class PlayerMovement : NetworkBehaviour {
     //     shiftDirectionSign = newShiftSign;
     // }
 
-    [ClientCallback]
-    private void FixedUpdate() {
-        Move();
-        Jump();
-        // Shift();
-        Flip();
-        animator.SetFloat("HorizontalSpeed", Mathf.Abs(myRigidbody.velocity.x));
-        animator.SetFloat("VerticalSpeed", myRigidbody.velocity.y);
-    }
-
     private void Move() {
         if (isMoveDisabled) { return; }
 
-        myRigidbody.velocity = new Vector2(moveInput * moveSpeed * Time.fixedDeltaTime, myRigidbody.velocity.y);
+        rb.velocity = new Vector2(moveInput * moveSpeed * Time.fixedDeltaTime, rb.velocity.y);
+        // rb.AddRelativeForce(Vector2.right *(moveInput*moveSpeed * Time.fixedDeltaTime), ForceMode2D.Impulse);
     }
 
     private void Jump() {
@@ -91,13 +95,13 @@ public class PlayerMovement : NetworkBehaviour {
 
         jumpInput = false;
 
-        Vector2 velocity = myRigidbody.velocity;
+        Vector2 velocity = rb.velocity;
         if (isGrounded) {
-            myRigidbody.velocity = new Vector2(velocity.x, jumpSpeed);
+            rb.velocity = new Vector2(velocity.x, jumpSpeed);
             jumpCounter = 1;
             animator.SetTrigger("Jump");
         } else if (jumpCounter == 1) {
-            myRigidbody.velocity = new Vector2(velocity.x, jumpSpeed);
+            rb.velocity = new Vector2(velocity.x, jumpSpeed);
             animator.SetTrigger("Jump");
             jumpCounter = 2;
         }
@@ -117,7 +121,7 @@ public class PlayerMovement : NetworkBehaviour {
     // }
 
     private void Flip() {
-        float velocityX = myRigidbody.velocity.x;
+        float velocityX = rb.velocity.x;
         if (velocityX < 0) {
             transform.rotation = Quaternion.Euler(0, 180, 0);
         }

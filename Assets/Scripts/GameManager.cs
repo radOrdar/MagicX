@@ -4,7 +4,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour {
     [SerializeField] private Texture2D cursorTexture;
     [SerializeField] private TextMeshProUGUI fpsText;
-    [SerializeField] private int targetFPS = 60;
+    [SerializeField] private int targetFPS = 120;
 
     void Start() {
         Cursor.SetCursor(cursorTexture, new Vector2(cursorTexture.width/2, cursorTexture.height/2), CursorMode.Auto);
