@@ -87,7 +87,7 @@ public class PlayerShooting : NetworkBehaviour {
     }
 
     [ClientRpc]
-    private void PlayShootEffect() {
+    private void RpcPlayShootEffect() {
         shootEffect.Play();
     }
 
@@ -101,7 +101,7 @@ public class PlayerShooting : NetworkBehaviour {
         proj.GetComponent<Projectile>().SetInitialSpeed(spawnProjTrans.right * projSpeed);
         NetworkServer.Spawn(proj, connectionToClient);
         
-        PlayShootEffect();
+        RpcPlayShootEffect();
         if (currentBullets <= 0) {
             StartCoroutine(ReloadMagazineRoutine());
         }

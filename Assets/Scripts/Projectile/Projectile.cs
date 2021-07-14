@@ -10,7 +10,7 @@ public class Projectile : NetworkBehaviour {
     [SyncVar] private Vector2 startSpeed;
 
     public void Start() {
-        rb.AddRelativeForce(startSpeed, ForceMode2D.Impulse);
+        rb.AddForce(startSpeed, ForceMode2D.Impulse);
     }
     
     private void FixedUpdate() {
