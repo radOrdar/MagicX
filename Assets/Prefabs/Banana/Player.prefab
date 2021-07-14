@@ -899,7 +899,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   syncMode: 0
-  syncInterval: 0.1
+  syncInterval: 0.03
   projSpeed: 20
   coolDownTime: 3
   bulletsPool: 2
@@ -941,7 +941,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   syncMode: 0
-  syncInterval: 0.1
+  syncInterval: 0.03
   maxHealth: 100
 --- !u!114 &-6313955724757140186
 MonoBehaviour:
@@ -955,6 +955,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c860930a7f97204dbd19c3952d7ebe4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 3784154246906092529}
   health: {fileID: 7359965614406593287}
   healthBarImage: {fileID: 1478443760630510688}
 --- !u!114 &7292172674405402239
