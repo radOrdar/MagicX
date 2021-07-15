@@ -7,6 +7,7 @@ public class PlayerVisual : MonoBehaviour {
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Health health;
     [SerializeField] private Image healthBarImage;
+    [SerializeField] private Color32 colorToChangeWhenGainDamage = Color.red;
 
     private Color defaultColor;
     private bool attackColorCurrentlyChanging;
@@ -21,7 +22,6 @@ public class PlayerVisual : MonoBehaviour {
     }
 
     private void HandleHealthUpdated(float currentHealth, float maxHealth) {
-        Debug.Log("healthUpdated");
         healthBarImage.fillAmount = currentHealth / maxHealth;
         if (!attackColorCurrentlyChanging) {
             StartCoroutine(ChangeColorRoutine());
@@ -30,7 +30,7 @@ public class PlayerVisual : MonoBehaviour {
 
     private IEnumerator ChangeColorRoutine() {
         attackColorCurrentlyChanging = true;
-        spriteRenderer.color = Color.red;
+        spriteRenderer.color = colorToChangeWhenGainDamage;
         yield return new WaitForSeconds(.2f);
         spriteRenderer.color = defaultColor;
         attackColorCurrentlyChanging = false;

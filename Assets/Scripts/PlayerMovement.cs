@@ -59,7 +59,6 @@ public class PlayerMovement : NetworkBehaviour {
         if (!hasAuthority) { return; }
         Move();
         Jump();
-        // Shift();
         Flip();
         animator.SetFloat("HorizontalSpeed", Mathf.Abs(rb.velocity.x));
         animator.SetFloat("VerticalSpeed", rb.velocity.y);
@@ -78,16 +77,10 @@ public class PlayerMovement : NetworkBehaviour {
         jumpInput = true;
     }
 
-    // public void UpdateShiftInput(bool newShiftInput, int newShiftSign) {
-    //     shiftInput = newShiftInput;
-    //     shiftDirectionSign = newShiftSign;
-    // }
-
     private void Move() {
         if (isMoveDisabled) { return; }
 
         rb.velocity = new Vector2(moveInput * moveSpeed * Time.fixedDeltaTime, rb.velocity.y);
-        // rb.AddRelativeForce(Vector2.right *(moveInput*moveSpeed * Time.fixedDeltaTime), ForceMode2D.Impulse);
     }
 
     private void Jump() {
@@ -107,19 +100,6 @@ public class PlayerMovement : NetworkBehaviour {
         }
     }
 
-    // private void Shift() {
-    //     if (!shiftInput || !shiftIsReady) { return; }
-    //
-    //     isMoveDisabled = true;
-    //     shiftInput = false;
-    //     myRigidbody.AddForce(new Vector2(shiftForce * shiftDirectionSign, 0), ForceMode2D.Impulse);
-    //     StartCoroutine(EnableMovementCoroutine());
-    //     if (enableShiftCooldown) {
-    //         shiftIsReady = false;
-    //         StartCoroutine(ShiftCooldownCoroutine());
-    //     }
-    // }
-
     private void Flip() {
         float velocityX = rb.velocity.x;
         if (velocityX < 0) {
@@ -135,9 +115,27 @@ public class PlayerMovement : NetworkBehaviour {
     //     yield return new WaitForSeconds(shiftCoolDown);
     //     shiftIsReady = true;
     // }
+    // public void UpdateShiftInput(bool newShiftInput, int newShiftSign) {
+    //     shiftInput = newShiftInput;
+    //     shiftDirectionSign = newShiftSign;
+    // }
     //
     // private IEnumerator EnableMovementCoroutine() {
     //     yield return new WaitForSeconds(.1f);
     //     isMoveDisabled = false;
+    // }
+    
+    
+    // private void Shift() {
+    //     if (!shiftInput || !shiftIsReady) { return; }
+    //
+    //     isMoveDisabled = true;
+    //     shiftInput = false;
+    //     myRigidbody.AddForce(new Vector2(shiftForce * shiftDirectionSign, 0), ForceMode2D.Impulse);
+    //     StartCoroutine(EnableMovementCoroutine());
+    //     if (enableShiftCooldown) {
+    //         shiftIsReady = false;
+    //         StartCoroutine(ShiftCooldownCoroutine());
+    //     }
     // }
 }
