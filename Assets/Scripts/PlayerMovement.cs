@@ -19,20 +19,27 @@ public class PlayerMovement : NetworkBehaviour {
     [SerializeField] private Collider2D myCollider;
     [SerializeField] private Animator animator;
 
-    private bool jumpInput;
+    public bool JumpInput {
+        private get;
+        set;
+    }
     private int jumpCounter;
     private bool isGrounded;
 
-    private float moveInput;
+    public float MoveInput {
+        private get;
+        set;
+    }
     private bool isMoveDisabled;
 
-    private bool shiftIsReady = true;
-    private bool shiftInput;
-    private int shiftDirectionSign; //1 or -1 (right or left)
+    // private bool shiftIsReady = true;
+    // private bool shiftInput;
+    // private int shiftDirectionSign; //1 or -1 (right or left)
 
+    //TODO replace with flag mb?
     private Coroutine updateGroundRoutine;
 
-    // [ClientCallback]
+    [Client]
     private void OnCollisionEnter2D(Collision2D other) {
         if (!hasAuthority) { return; }
         if (other.collider.CompareTag("Floor")) {
@@ -46,7 +53,7 @@ public class PlayerMovement : NetworkBehaviour {
         }
     }
 
-    // [ClientCallback]
+    [Client]
     private void OnCollisionExit2D(Collision2D other) {
         if (!hasAuthority) { return; }
         if (other.collider.CompareTag("Floor")) {
@@ -54,7 +61,7 @@ public class PlayerMovement : NetworkBehaviour {
         }
     }
     
-    // [ClientCallback]
+    [Client]
     private void FixedUpdate() {
         if (!hasAuthority) { return; }
         Move();
@@ -69,24 +76,16 @@ public class PlayerMovement : NetworkBehaviour {
         isGrounded = false;
     }
 
-    public void UpdateMoveInput(float newMoveInput) {
-        moveInput = newMoveInput;
-    }
-
-    public void UpdateJumpInput() {
-        jumpInput = true;
-    }
-
     private void Move() {
         if (isMoveDisabled) { return; }
 
-        rb.velocity = new Vector2(moveInput * moveSpeed * Time.fixedDeltaTime, rb.velocity.y);
+        rb.velocity = new Vector2(MoveInput * moveSpeed * Time.fixedDeltaTime, rb.velocity.y);
     }
 
     private void Jump() {
-        if (!jumpInput) { return; }
+        if (!JumpInput) { return; }
 
-        jumpInput = false;
+        JumpInput = false;
 
         Vector2 velocity = rb.velocity;
         if (isGrounded) {
@@ -103,11 +102,11 @@ public class PlayerMovement : NetworkBehaviour {
     private void Flip() {
         float velocityX = rb.velocity.x;
         if (velocityX < 0) {
-            transform.rotation = Quaternion.Euler(0, 180, 0);
+            transform.localScale = new Vector3(-1, 1, 1);
         }
-
+        
         if (velocityX > 0) {
-            transform.rotation = Quaternion.Euler(0, 0, 0);
+            transform.localScale = new Vector3(1, 1, 1);
         }
     }
 

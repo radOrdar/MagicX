@@ -33,7 +33,7 @@ public class Projectile : NetworkBehaviour {
 
     #region Server
 
-    [ServerCallback]
+    [Server]
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.TryGetComponent(out NetworkIdentity identity)) {
             if (identity.connectionToClient == connectionToClient) {

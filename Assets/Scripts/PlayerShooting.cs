@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Mirror;
 using UnityEngine;
@@ -8,22 +9,24 @@ public class PlayerShooting : NetworkBehaviour {
     [SerializeField] private float projSpeed = 20;
     [SerializeField] private float coolDownTime = 3;
     [SerializeField] private int bulletsPool = 2;
-    
     [SerializeField] private Transform spawnProjTrans;
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private Transform handAndGunToRotate;
     [SerializeField] private Image magazineReloadIndicator;
     [SerializeField] private GameObject bulletIndicatorPanel;
-
     [SerializeField] private ParticleSystem shootEffect;
-    
-    private Camera mainCamera;
-    
+
     [SyncVar(hook = nameof(HandleCurrentBulletChange))]
     private int currentBullets;
     
     private GameObject[] bulletIndicators;
-    
+    private Camera mainCamera;
+
+    public bool ShootInput {
+        private get;
+        set;
+    }
+
     private void Start() {
         int transformChildCount = bulletIndicatorPanel.transform.childCount;
         GameObject[] bulletIndicatorChilds = new GameObject[transformChildCount];
@@ -47,17 +50,40 @@ public class PlayerShooting : NetworkBehaviour {
     private void Update() {
         if (!hasAuthority) { return; }
         RotateGunToCursor();
+        if (ShootInput) {
+            CmdShoot(spawnProjTrans.position, spawnProjTrans.right);
+            ShootInput = false;
+        }
     }
-    
+
     private void RotateGunToCursor() {
         Vector2 cursorPos = mainCamera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-        Quaternion targetRotation = Quaternion.FromToRotation(Vector2.right, cursorPos - (Vector2)handAndGunToRotate.position);
-        if (cursorPos.x < transform.position.x) {
-            Vector3 rotationEulerAngles = targetRotation.eulerAngles;
-            targetRotation = Quaternion.Euler(180, rotationEulerAngles.y, -rotationEulerAngles.z);
-        }
 
+        Quaternion targetRotation;
+        if (transform.localScale.x >= 0) {
+            spawnProjTrans.localRotation = Quaternion.Euler(0, 0, 0);
+            spawnProjTrans.localScale = new Vector3(1, 1, 1);
+            targetRotation = Quaternion.FromToRotation(Vector2.right, cursorPos - (Vector2)handAndGunToRotate.position);
+            if (cursorPos.x < transform.position.x) {
+                targetRotation = Quaternion.Euler(180, 0, -targetRotation.eulerAngles.z);
+            }
+        } else {
+            spawnProjTrans.localRotation = Quaternion.Euler(0, 180, 0);
+            targetRotation = Quaternion.FromToRotation(Vector2.left, cursorPos - (Vector2)handAndGunToRotate.position);
+            if (cursorPos.x > transform.position.x) {
+                targetRotation = Quaternion.Euler(180, 0, -targetRotation.eulerAngles.z);
+            }
+        }
         handAndGunToRotate.transform.rotation = targetRotation;
+        // else if (transform.localScale.x < 0) {
+        //     if (cursorPos.x < transform.position.x) {
+        //         targetRotation = Quaternion.Euler(0, 0,  90 - targetRotation.eulerAngles.z);
+        //     } else {
+        //         targetRotation = Quaternion.Euler(180, 0, 90 - targetRotation.eulerAngles.z);
+        //     }
+        // }
+       
+        // handAndGunToRotate.transform.LookAt(cursorPos, Vector3.right);
     }
     
     private IEnumerator ReloadMagazineIndicatorRoutine() {
@@ -94,11 +120,11 @@ public class PlayerShooting : NetworkBehaviour {
     #region Server
 
     [Command]
-    public void CmdShoot() {
+    public void CmdShoot(Vector3 shootPos, Vector3 shootDir) {
         if (currentBullets <= 0) { return; }
         currentBullets--;
-        GameObject proj = Instantiate(projectilePrefab, spawnProjTrans.position, Quaternion.identity);
-        proj.GetComponent<Projectile>().SetInitialSpeed(spawnProjTrans.right * projSpeed);
+        GameObject proj = Instantiate(projectilePrefab, shootPos, Quaternion.identity);
+        proj.GetComponent<Projectile>().SetInitialSpeed(shootDir * projSpeed);
         NetworkServer.Spawn(proj, connectionToClient);
         
         RpcPlayShootEffect();
