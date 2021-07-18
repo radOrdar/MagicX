@@ -71,7 +71,7 @@ MonoBehaviour:
   sceneId: 0
   serverOnly: 0
   visible: 2
-  m_AssetId: 
+  m_AssetId: 0dc2297b6afe2024e8c91717c80a72a3
   hasSpawned: 0
 --- !u!212 &5299120320140031308
 SpriteRenderer:
