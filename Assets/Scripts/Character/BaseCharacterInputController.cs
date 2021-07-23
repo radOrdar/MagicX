@@ -13,12 +13,12 @@ public abstract class BaseCharacterInputController : NetworkBehaviour {
     }
 
     public void OnMovement(InputAction.CallbackContext ctx) {
-        if (!isLocalPlayer) { return; }
+        if (!hasAuthority) { return; }
         characterMovement.MoveInput = ctx.ReadValue<float>();
     }
 
     public void OnJump(InputAction.CallbackContext ctx) {
-        if (!isLocalPlayer) { return; }
+        if (!hasAuthority) { return; }
         if (ctx.canceled) {
             characterMovement.JumpInput = true;
         }

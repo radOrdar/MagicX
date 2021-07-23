@@ -28,9 +28,7 @@ public class KiwiShooting : BaseCharacterShooting {
             performedBullets++;
             yield return new WaitForSeconds(shootingBurstSpeed);
             float angle = Mathf.Atan2(spawnProjTrans.right.y, spawnProjTrans.right.x) * Mathf.Rad2Deg;
-            Debug.Log(performedBullets + " " + angle);
             float dispersion = Random.Range(-disperseFactor * performedBullets, disperseFactor * performedBullets);
-            Debug.Log(performedBullets + " " + dispersion);
             angle += dispersion;
             CmdShoot(spawnProjTrans.position, new Vector3(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad)));    
         }

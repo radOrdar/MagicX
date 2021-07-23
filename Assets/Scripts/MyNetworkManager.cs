@@ -8,7 +8,8 @@ using Mirror;
 */
 
 public class MyNetworkManager : NetworkManager {
-    
+    [SerializeField] private GameObject[] charPrefabs;
+
     #region Unity Callbacks
 
     public override void OnValidate() {
@@ -135,6 +136,11 @@ public class MyNetworkManager : NetworkManager {
     /// <param name="conn">Connection from client.</param>
     public override void OnServerAddPlayer(NetworkConnection conn) {
         base.OnServerAddPlayer(conn);
+
+        int index = Random.Range(0, 2);
+        Transform startPosition = startPositions[index];
+        var gameObject = Instantiate(charPrefabs[index], startPosition.position, startPosition.rotation);
+        NetworkServer.Spawn(gameObject, conn);
     }
 
     /// <summary>
