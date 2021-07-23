@@ -4,16 +4,19 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public class PlayerShooting : NetworkBehaviour {
-    [SerializeField] private float projSpeed = 20;
+public abstract class BaseCharacterShooting : NetworkBehaviour {
+   
+   [SerializeField] private float projSpeed = 20;
     [SerializeField] private float coolDownTime = 3;
     [SerializeField] private int bulletsPool = 2;
-    [SerializeField] private Transform spawnProjTrans;
-    [SerializeField] private GameObject projectilePrefab;
+    [SerializeField] protected Transform spawnProjTrans;
+    [SerializeField] private GameObject pfBullet;
     [SerializeField] private Transform handAndGunToRotate;
     [SerializeField] private Image magazineReloadIndicator;
     [SerializeField] private GameObject bulletIndicatorPanel;
     [SerializeField] private ParticleSystem shootEffect;
+
+    public ShootInput ShootInputVal { protected get; set; } = ShootInput.None;
 
     [SyncVar(hook = nameof(HandleCurrentBulletChange))]
     private int currentBullets;
@@ -21,7 +24,7 @@ public class PlayerShooting : NetworkBehaviour {
     private GameObject[] bulletIndicators;
     private Camera mainCamera;
 
-    public bool ShootInput { private get; set; }
+    
 
     private void Start() {
         int transformChildCount = bulletIndicatorPanel.transform.childCount;
@@ -48,10 +51,7 @@ public class PlayerShooting : NetworkBehaviour {
         if (!hasAuthority) { return; }
 
         RotateGunToCursor();
-        if (ShootInput) {
-            CmdShoot(spawnProjTrans.position, spawnProjTrans.right);
-            ShootInput = false;
-        }
+        Shoot();
     }
 
     private void RotateGunToCursor() {
@@ -84,6 +84,8 @@ public class PlayerShooting : NetworkBehaviour {
 
         // handAndGunToRotate.transform.LookAt(cursorPos, Vector3.right);
     }
+
+    protected abstract void Shoot();
 
     private IEnumerator ReloadMagazineIndicatorRoutine() {
         magazineReloadIndicator.fillAmount = 0;
@@ -125,8 +127,8 @@ public class PlayerShooting : NetworkBehaviour {
         if (currentBullets <= 0) { return; }
 
         currentBullets--;
-        GameObject proj = Instantiate(projectilePrefab, shootPos, Quaternion.identity);
-        proj.GetComponent<Projectile>().SetInitialSpeed(shootDir * projSpeed);
+        GameObject proj = Instantiate(pfBullet, shootPos, Quaternion.Euler(new Vector3(0,0,Mathf.Atan2(shootDir.y, shootDir.x) * Mathf.Rad2Deg)));
+        proj.GetComponent<Bullet>().SetInitialSpeed(shootDir * projSpeed);
         NetworkServer.Spawn(proj, connectionToClient);
 
         RpcPlayShootEffect();
@@ -141,4 +143,10 @@ public class PlayerShooting : NetworkBehaviour {
     }
 
     #endregion
+
+    public enum ShootInput {
+        Started,
+        Canceled,
+        None
+    }
 }

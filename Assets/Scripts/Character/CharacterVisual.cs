@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerVisual : MonoBehaviour {
+public class CharacterVisual : MonoBehaviour {
 
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Health health;

@@ -54,7 +54,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Banana_Downing
+  m_Name: Kiwi_Downing
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -68,7 +68,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 1bdd293c0923bf94786804b6e041dc14, type: 2}
+  m_Motion: {fileID: 7400000, guid: 78a1cce6a2746f44f9a7d97b0557745c, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -106,7 +106,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Banana_JumpUp
+  m_Name: Kiwi_JumpUp
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -121,7 +121,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 71557be8b5922c54883682399f91ee83, type: 2}
+  m_Motion: {fileID: 7400000, guid: 83e3b26e5cfb1e54cb7dc129d690a7bf, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -180,7 +180,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BananaController
+  m_Name: Kiwi_animController
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: Jump
@@ -314,7 +314,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Banana_Idle
+  m_Name: Kiwi_Idle
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -328,7 +328,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 56f3fa8ec73bf4540b80e0492f1126f8, type: 2}
+  m_Motion: {fileID: 7400000, guid: 17c40ea0148f0ff48834a173cc84743e, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -391,7 +391,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Banana_Running
+  m_Name: Kiwi_Running
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -405,7 +405,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 43172552b81ba224d9629b94747284a6, type: 2}
+  m_Motion: {fileID: 7400000, guid: 527684f1c9e875b43bb7d4cfc05ab794, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -418,7 +418,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Banana_Landing
+  m_Name: Kiwi_Landing
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -432,7 +432,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 53e8906e089a5414cad0c9631858ebc0, type: 2}
+  m_Motion: {fileID: 7400000, guid: 54d0d8ae9694b004cb2528f25725e91c, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

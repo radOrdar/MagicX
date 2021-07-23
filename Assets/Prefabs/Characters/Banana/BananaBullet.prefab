@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -2914720309653470363}
   - component: {fileID: 1871696594956943960}
   m_Layer: 8
-  m_Name: Projectile
+  m_Name: BananaBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

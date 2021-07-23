@@ -666,7 +666,7 @@ GameObject:
   - component: {fileID: 1560548166}
   - component: {fileID: -3831304093267303437}
   m_Layer: 6
-  m_Name: PlayerBanana
+  m_Name: BananaCharacter
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -885,9 +885,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  playerMovement: {fileID: -1580607743569591321}
-  playerShooting: {fileID: 8199482182330946248}
-  playerInputAsset: {fileID: -7275830628763446323}
+  characterMovement: {fileID: -1580607743569591321}
+  characterShooting: {fileID: 8199482182330946248}
+  characterInputAsset: {fileID: -7275830628763446323}
 --- !u!114 &8199482182330946248
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -906,7 +906,7 @@ MonoBehaviour:
   coolDownTime: 3
   bulletsPool: 2
   spawnProjTrans: {fileID: 5014805027652582736}
-  projectilePrefab: {fileID: 8779774710099683455, guid: 0dc2297b6afe2024e8c91717c80a72a3, type: 3}
+  pfBullet: {fileID: 8779774710099683455, guid: 0dc2297b6afe2024e8c91717c80a72a3, type: 3}
   handAndGunToRotate: {fileID: 7250171379588898900}
   magazineReloadIndicator: {fileID: 8320704364709026362}
   bulletIndicatorPanel: {fileID: 8586783610800513807}
@@ -927,9 +927,6 @@ MonoBehaviour:
   syncInterval: 0.1
   moveSpeed: 300
   jumpSpeed: 15
-  rb: {fileID: 3784154246906092533}
-  myCollider: {fileID: 3784154246906092531}
-  animator: {fileID: 1560548166}
 --- !u!114 &7359965614406593287
 MonoBehaviour:
   m_ObjectHideFlags: 0

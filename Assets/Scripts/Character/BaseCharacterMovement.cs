@@ -1,10 +1,10 @@
 using System;
 using System.Collections;
 using Mirror;
-using Telepathy;
 using UnityEngine;
 
-public class PlayerMovement : NetworkBehaviour {
+public abstract class BaseCharacterMovement : NetworkBehaviour {
+   
     // [Header("Shift Params")]
     // [SerializeField] private bool enableShiftCooldown;
     // [SerializeField] private int shiftForce;
@@ -13,11 +13,14 @@ public class PlayerMovement : NetworkBehaviour {
     [Header("Movement params")]
     [SerializeField] private float moveSpeed;
     [SerializeField] private float jumpSpeed;
+    
+    private Rigidbody2D rb;
+    private Animator animator;
 
-    [Header("Components")]
-    [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private Collider2D myCollider;
-    [SerializeField] private Animator animator;
+    private void Start() {
+        rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+    }
 
     public bool JumpInput {
         private get;
@@ -39,7 +42,7 @@ public class PlayerMovement : NetworkBehaviour {
     //TODO replace with flag mb?
     private Coroutine updateGroundRoutine;
 
-    [Client]
+    [ClientCallback]
     private void OnCollisionEnter2D(Collision2D other) {
         if (!hasAuthority) { return; }
         if (other.collider.CompareTag("Floor")) {
@@ -53,7 +56,7 @@ public class PlayerMovement : NetworkBehaviour {
         }
     }
 
-    [Client]
+    [ClientCallback]
     private void OnCollisionExit2D(Collision2D other) {
         if (!hasAuthority) { return; }
         if (other.collider.CompareTag("Floor")) {
@@ -61,7 +64,7 @@ public class PlayerMovement : NetworkBehaviour {
         }
     }
     
-    [Client]
+    [ClientCallback]
     private void FixedUpdate() {
         if (!hasAuthority) { return; }
         Move();
@@ -99,6 +102,7 @@ public class PlayerMovement : NetworkBehaviour {
         }
     }
 
+    //TODO mb flip only on authoritive instance? will it sync?
     private void Flip() {
         float velocityX = rb.velocity.x;
         if (velocityX < 0) {

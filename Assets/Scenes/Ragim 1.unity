@@ -2846,6 +2846,18 @@ PrefabInstance:
       propertyPath: offlineScene
       value: Assets/Scenes/Ragim 1.unity
       objectReference: {fileID: 0}
+    - target: {fileID: 2909861333191554970, guid: 48642c4aaa267354db551c70d7a2e84a, type: 3}
+      propertyPath: playerPrefab
+      value: 
+      objectReference: {fileID: 3784154246906092538, guid: e93e9f083ea82c04cb87dc0f34501964, type: 3}
+    - target: {fileID: 2909861333191554970, guid: 48642c4aaa267354db551c70d7a2e84a, type: 3}
+      propertyPath: spawnPrefabs.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2909861333191554970, guid: 48642c4aaa267354db551c70d7a2e84a, type: 3}
+      propertyPath: spawnPrefabs.Array.data[2]
+      value: 
+      objectReference: {fileID: 8779774710099683455, guid: 4e0aa4dbf3edae14f85e6d0c5044f909, type: 3}
     - target: {fileID: 2909861333191554973, guid: 48642c4aaa267354db551c70d7a2e84a, type: 3}
       propertyPath: m_RootOrder
       value: 6

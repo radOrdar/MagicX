@@ -2,7 +2,7 @@ using kcp2k;
 using Mirror;
 using UnityEngine;
 
-public class Projectile : NetworkBehaviour {
+public class Bullet : NetworkBehaviour {
     [SerializeField] private int damageToDeal = 20;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private ParticleSystem explosion;
