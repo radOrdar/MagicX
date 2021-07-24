@@ -531,7 +531,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  moveSpeed: 350
+  moveSpeed: 300
   jumpSpeed: 15
 --- !u!114 &-9082273520276035385
 MonoBehaviour:
@@ -549,7 +549,7 @@ MonoBehaviour:
   syncInterval: 0.1
   projSpeed: 40
   coolDownTime: 3
-  bulletsPool: 15
+  bulletsPool: 13
   spawnProjTrans: {fileID: 5014805027652582736}
   pfBullet: {fileID: 8779774710099683455, guid: 4e0aa4dbf3edae14f85e6d0c5044f909, type: 3}
   handAndGunToRotate: {fileID: 7250171379588898900}
@@ -558,7 +558,7 @@ MonoBehaviour:
   bulletIndicator: {fileID: 7142203785882009930, guid: e16704092022dfe45bf6a7d0538aa3c9, type: 3}
   shootEffect: {fileID: 8841763617714611668}
   shootingBurstSpeed: 0.15
-  disperseFactor: 3.5
+  disperseFactor: 2
   delayBetweenClick: 1
   maxDisperseAngle: 20
 --- !u!114 &7359965614406593287
@@ -575,7 +575,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.03
-  maxHealth: 100
+  maxHealth: 80
 --- !u!114 &-6313955724757140186
 MonoBehaviour:
   m_ObjectHideFlags: 0

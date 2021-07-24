@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 2909861333191554973}
   - component: {fileID: 2909861333191554970}
   - component: {fileID: 2909861333191554971}
-  - component: {fileID: 2909861333191554968}
   - component: {fileID: 2909861333191554975}
   - component: {fileID: 2909861333191554972}
+  - component: {fileID: 1957698919}
   m_Layer: 0
   m_Name: NetworkManager
   m_TagString: Untagged
@@ -52,20 +52,26 @@ MonoBehaviour:
   runInBackground: 1
   autoStartServerBuild: 1
   serverTickRate: 60
-  offlineScene: Assets/Scenes/Ragim.unity
-  onlineScene: Assets/Scenes/Ragim.unity
+  offlineScene: Assets/Scenes/Ragim 1.unity
+  onlineScene: Assets/Scenes/Ragim 1.unity
   transport: {fileID: 2909861333191554971}
   networkAddress: localhost
   maxConnections: 3
   disconnectInactiveConnections: 0
   disconnectInactiveTimeout: 60
   authenticator: {fileID: 0}
-  playerPrefab: {fileID: 3784154246906092538, guid: a82a3c7603964a44a84f8db2f7ad3896, type: 3}
+  playerPrefab: {fileID: 8970046682570307704, guid: 02e9d084393a5fb46bfec16bab22ae66, type: 3}
   autoCreatePlayer: 1
   playerSpawnMethod: 1
   spawnPrefabs:
   - {fileID: 8779774710099683455, guid: 0dc2297b6afe2024e8c91717c80a72a3, type: 3}
   - {fileID: 4439486593856678391, guid: 6ece73c42ed23b4488cc4a5ce71c2958, type: 3}
+  - {fileID: 8779774710099683455, guid: 4e0aa4dbf3edae14f85e6d0c5044f909, type: 3}
+  - {fileID: 3784154246906092538, guid: a82a3c7603964a44a84f8db2f7ad3896, type: 3}
+  - {fileID: 3784154246906092538, guid: e93e9f083ea82c04cb87dc0f34501964, type: 3}
+  charPrefabs:
+  - {fileID: 3784154246906092538, guid: a82a3c7603964a44a84f8db2f7ad3896, type: 3}
+  - {fileID: 3784154246906092538, guid: e93e9f083ea82c04cb87dc0f34501964, type: 3}
 --- !u!114 &2909861333191554971
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -89,21 +95,6 @@ MonoBehaviour:
   debugLog: 0
   statisticsGUI: 0
   statisticsLog: 0
---- !u!114 &2909861333191554968
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2909861333191554969}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6442dc8070ceb41f094e44de0bf87274, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  showGUI: 1
-  offsetX: 0
-  offsetY: 0
 --- !u!114 &2909861333191554975
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,3 +140,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   networkDiscovery: {fileID: 2909861333191554975}
+--- !u!114 &1957698919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2909861333191554969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc654f29862fc2643b948f772ebb9e68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: {r: 1, g: 0, b: 0, a: 1}
+  padding: 20

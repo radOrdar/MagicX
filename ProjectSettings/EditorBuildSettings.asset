@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Lobby.unity
+    guid: 91f6556163ff79c4097963da8461ead2
+  - enabled: 1
+    path: Assets/Scenes/Ragim.unity
+    guid: 491fbb55ced7e2c4ba5bd0ee00d2aae3
+  - enabled: 1
     path: Assets/Scenes/Ragim 1.unity
     guid: 34325162138391b4dabebca933d24d24
   m_configObjects: {}
