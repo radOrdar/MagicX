@@ -1,12 +1,12 @@
 using System.Collections;
+using System.Collections.Generic;
 using Mirror;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public abstract class BaseCharacterShooting : NetworkBehaviour {
-   
-   [SerializeField] private float projSpeed = 20;
+    [SerializeField] private float projSpeed = 20;
     [SerializeField] private float coolDownTime = 3;
     [SerializeField] private int bulletsPool = 2;
     [SerializeField] protected Transform spawnProjTrans;
@@ -14,27 +14,23 @@ public abstract class BaseCharacterShooting : NetworkBehaviour {
     [SerializeField] private Transform handAndGunToRotate;
     [SerializeField] private Image magazineReloadIndicator;
     [SerializeField] private GameObject bulletIndicatorPanel;
+    [SerializeField] private GameObject bulletIndicator;
     [SerializeField] private ParticleSystem shootEffect;
 
     public ShootInput ShootInputVal { protected get; set; } = ShootInput.None;
 
     [SyncVar(hook = nameof(HandleCurrentBulletChange))]
     private int currentBullets;
-
-    private GameObject[] bulletIndicators;
+    private List<GameObject> bulletIndicators;
     private Camera mainCamera;
 
-    
 
-    private void Start() {
-        int transformChildCount = bulletIndicatorPanel.transform.childCount;
-        GameObject[] bulletIndicatorChilds = new GameObject[transformChildCount];
-        for (int i = 0; i < transformChildCount; i++) {
-            bulletIndicatorChilds[i] = bulletIndicatorPanel.transform.GetChild(i).gameObject;
+    public override void OnStartClient() {
+        bulletIndicators = new List<GameObject>(bulletsPool);
+        for (int i = 0; i < bulletsPool; i++) {
+            var bullIndic = Instantiate(bulletIndicator, bulletIndicatorPanel.transform);
+            bulletIndicators.Add(bullIndic);
         }
-
-        bulletIndicators = bulletIndicatorChilds;
-        HandleCurrentBulletChange(0, bulletsPool);
     }
 
     public override void OnStartAuthority() {
@@ -127,7 +123,7 @@ public abstract class BaseCharacterShooting : NetworkBehaviour {
         if (currentBullets <= 0) { return; }
 
         currentBullets--;
-        GameObject proj = Instantiate(pfBullet, shootPos, Quaternion.Euler(new Vector3(0,0,Mathf.Atan2(shootDir.y, shootDir.x) * Mathf.Rad2Deg)));
+        GameObject proj = Instantiate(pfBullet, shootPos, Quaternion.Euler(new Vector3(0, 0, Mathf.Atan2(shootDir.y, shootDir.x) * Mathf.Rad2Deg)));
         proj.GetComponent<Bullet>().SetInitialSpeed(shootDir * projSpeed);
         NetworkServer.Spawn(proj, connectionToClient);
 
