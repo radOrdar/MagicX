@@ -3,10 +3,17 @@ using Mirror;
 using UnityEngine;
 
 public class MagicPlayer : NetworkBehaviour {
+    public enum CharacterType {
+        None = -1,
+        Banana = 0,
+        Kiwi = 1
+    }
+
     [SyncVar(hook = nameof(AuthorityHandlePartyOwnerStateUpdated))]
     public bool isPartyOwner;
 
-    [field: SyncVar] public int ChosenCharacter { get; set; } = -1;
+    [field: SyncVar(hook = nameof(ClientHandleChosenCharacter))]
+    public CharacterType chosenCharacterType { get; set; } = CharacterType.None;
 
     [field: SyncVar(hook = nameof(ClientHandleDisplayNameUpdated))]
     public string DisplayName { get; [Server] set; }
@@ -27,20 +34,24 @@ public class MagicPlayer : NetworkBehaviour {
     public void CmdStartGame() {
         if (!isPartyOwner) { return; }
 
-        ((MyNetworkManager) NetworkManager.singleton).StartGame();
+        ((MagicNetworkManager) NetworkManager.singleton).StartGame();
     }
 
     [Command]
     public void CmdChoseCharacter(int val) {
-        if (val < 0 || val > ((MyNetworkManager) NetworkManager.singleton).charPrefabs.Length - 1) {
-            Debug.Log("Error: wrong character number chosen");
+        if (val < -1 || val > ((MagicNetworkManager) NetworkManager.singleton).charPrefabs.Length - 1) {
+            Debug.LogError("Error: wrong character number chosen");
             return;
         }
 
-        ChosenCharacter = val;
+        chosenCharacterType = (CharacterType) val;
     }
 
     private void ClientHandleDisplayNameUpdated(string oldDisplayName, string newDisplayName) {
+        ClientOnInfoUpdated?.Invoke();
+    }
+
+    private void ClientHandleChosenCharacter(CharacterType oldVal, CharacterType newVal) {
         ClientOnInfoUpdated?.Invoke();
     }
 
@@ -48,5 +59,21 @@ public class MagicPlayer : NetworkBehaviour {
         if (!hasAuthority) { return; }
 
         AuthorityOnPartyOwnerStateUpdated?.Invoke(newState);
+    }
+
+    public override void OnStartClient() {
+        if (NetworkServer.active) { return; }
+
+        DontDestroyOnLoad(gameObject);
+
+        ((MagicNetworkManager) NetworkManager.singleton).Players.Add(this);
+    }
+
+    public override void OnStopClient() {
+        ClientOnInfoUpdated?.Invoke();
+
+        if (!isClientOnly) { return; }
+
+        ((MagicNetworkManager) NetworkManager.singleton).Players.Remove(this);
     }
 }

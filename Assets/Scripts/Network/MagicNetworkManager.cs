@@ -1,17 +1,15 @@
+using System;
 using System.Collections.Generic;
 using Mirror;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-/*
-	Documentation: https://mirror-networking.gitbook.io/docs/components/network-manager
-	API Reference: https://mirror-networking.com/docs/api/Mirror.NetworkManager.html
-*/
-
-public class MyNetworkManager : NetworkManager {
+public class MagicNetworkManager : NetworkManager {
     [SerializeField] public GameObject[] charPrefabs;
 
     public List<MagicPlayer> Players { get; } = new List<MagicPlayer>();
+
+    public static event Action OnClientConnected;
 
     public override void OnServerDisconnect(NetworkConnection conn) {
         MagicPlayer player = conn.identity.GetComponent<MagicPlayer>();
@@ -29,8 +27,7 @@ public class MyNetworkManager : NetworkManager {
         if (Players.Count < 2) { return; }
 
         foreach (var player in Players) {
-            if (player.ChosenCharacter == -1) {
-                Debug.Log(player.DisplayName + " " + player.ChosenCharacter);
+            if (player.chosenCharacterType == MagicPlayer.CharacterType.None) {
                 return;
             }
         }
@@ -53,13 +50,22 @@ public class MyNetworkManager : NetworkManager {
         if (SceneManager.GetActiveScene().name.StartsWith("Ragim 1")) {
             foreach (MagicPlayer player in Players) {
                 GameObject characterInstance = Instantiate(
-                    charPrefabs[player.ChosenCharacter],
+                    charPrefabs[(int) player.chosenCharacterType],
                     GetStartPosition().position,
                     Quaternion.identity);
 
                 NetworkServer.Spawn(characterInstance, player.connectionToClient);
             }
         }
+    }
+
+    public override void OnClientConnect(NetworkConnection conn) {
+        base.OnClientConnect(conn);
+        OnClientConnected?.Invoke();
+    }
+
+    public override void OnClientDisconnect(NetworkConnection conn) {
+        SceneManager.LoadScene(offlineScene);
     }
 
     public override void OnStopClient() {
