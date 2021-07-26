@@ -12,12 +12,12 @@ public class KiwiShooting : BaseCharacterShooting {
     private bool shootingAllowed = true;
 
     protected override void Shoot() {
-        if (ShootInputVal == ShootInput.Started) {
-            ShootInputVal = ShootInput.None;
+        if (ShootInputVal == InputType.Started) {
+            ShootInputVal = InputType.None;
             if (!shootingAllowed) { return; }
 
             StartCoroutine(nameof(ShootRoutine));
-        } else if (ShootInputVal == ShootInput.Canceled) {
+        } else if (ShootInputVal == InputType.Canceled) {
             StopCoroutine(nameof(ShootRoutine));
         }
     }

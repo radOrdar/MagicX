@@ -1,18 +1,18 @@
-using kcp2k;
 using Mirror;
 using UnityEngine;
 
-public class Bullet : NetworkBehaviour {
+public class Bullet : NetworkBehaviour, IDamageable {
     [SerializeField] private int damageToDeal = 20;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private ParticleSystem explosion;
 
     [SyncVar] private Vector2 startSpeed;
+    private GameObject owner;
 
     public void Start() {
         rb.AddForce(startSpeed, ForceMode2D.Impulse);
     }
-    
+
     private void FixedUpdate() {
         RotateTowardMoveDirection();
     }
@@ -22,8 +22,9 @@ public class Bullet : NetworkBehaviour {
         rb.MoveRotation(Mathf.Atan2(currentVelocity.y, currentVelocity.x) * Mathf.Rad2Deg);
     }
 
-    public void SetInitialSpeed(Vector2 speed) {
+    public void Initialize(Vector2 speed, GameObject owner) {
         startSpeed = speed;
+        this.owner = owner;
     }
 
     public override void OnStopClient() {
@@ -33,7 +34,7 @@ public class Bullet : NetworkBehaviour {
 
     #region Server
 
-    [Server]
+    [ServerCallback]
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.TryGetComponent(out NetworkIdentity identity)) {
             if (identity.connectionToClient == connectionToClient) {
@@ -44,7 +45,7 @@ public class Bullet : NetworkBehaviour {
         if (other.TryGetComponent(out Health health)) {
             health.DealDamage(damageToDeal);
         }
-        
+
         DestroySelf();
     }
 
@@ -54,4 +55,12 @@ public class Bullet : NetworkBehaviour {
     }
 
     #endregion
+
+    public int GetDamage() {
+        return damageToDeal;
+    }
+
+    public GameObject GetOwner() {
+        return owner;
+    }
 }

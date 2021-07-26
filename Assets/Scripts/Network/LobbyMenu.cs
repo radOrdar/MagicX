@@ -31,7 +31,7 @@ public class LobbyMenu : MonoBehaviour {
         List<MagicPlayer> players = ((MagicNetworkManager) NetworkManager.singleton).Players;
         for (int i = 0; i < players.Count; i++) {
             playerNameTexts[i].text = players[i].DisplayName;
-            playerHeroTexts[i].text = players[i].chosenCharacterType == MagicPlayer.CharacterType.None ? "-" : players[i].chosenCharacterType.ToString();
+            playerHeroTexts[i].text = players[i].chosenCharacterType == CharacterType.None ? "-" : players[i].chosenCharacterType.ToString();
         }
 
         for (int i = players.Count; i < playerNameTexts.Length; i++) {

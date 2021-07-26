@@ -1,5 +1,5 @@
 {
-    "name": "PlayerControl",
+    "name": "KiwiControl",
     "maps": [
         {
             "name": "Keyboard&Mouse",
@@ -25,6 +25,14 @@
                     "name": "Shoot",
                     "type": "Button",
                     "id": "3aaecaf5-08dc-4fd5-851b-9280eeda0d94",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "ReturnDmg",
+                    "type": "Button",
+                    "id": "8dbdac83-d022-455c-905b-60ff1e46e60e",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -83,6 +91,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b18ed076-7338-4599-9623-d4634890ff77",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ReturnDmg",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

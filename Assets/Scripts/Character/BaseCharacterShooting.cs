@@ -17,7 +17,7 @@ public abstract class BaseCharacterShooting : NetworkBehaviour {
     [SerializeField] private GameObject bulletIndicator;
     [SerializeField] private ParticleSystem shootEffect;
 
-    public ShootInput ShootInputVal { protected get; set; } = ShootInput.None;
+    public InputType ShootInputVal { protected get; set; } = InputType.None;
 
     [SyncVar(hook = nameof(HandleCurrentBulletChange))]
     private int currentBullets;
@@ -36,7 +36,7 @@ public abstract class BaseCharacterShooting : NetworkBehaviour {
     public override void OnStartAuthority() {
         base.OnStartAuthority();
         mainCamera = Camera.main;
-        magazineReloadIndicator.gameObject.SetActive(false);
+        // magazineReloadIndicator.gameObject.SetActive(false);
     }
 
     public override void OnStartServer() {
@@ -124,7 +124,7 @@ public abstract class BaseCharacterShooting : NetworkBehaviour {
 
         currentBullets--;
         GameObject proj = Instantiate(pfBullet, shootPos, Quaternion.Euler(new Vector3(0, 0, Mathf.Atan2(shootDir.y, shootDir.x) * Mathf.Rad2Deg)));
-        proj.GetComponent<Bullet>().SetInitialSpeed(shootDir * projSpeed);
+        proj.GetComponent<Bullet>().Initialize(shootDir * projSpeed, gameObject);
         NetworkServer.Spawn(proj, connectionToClient);
 
         RpcPlayShootEffect();
@@ -140,9 +140,9 @@ public abstract class BaseCharacterShooting : NetworkBehaviour {
 
     #endregion
 
-    public enum ShootInput {
-        Started,
-        Canceled,
-        None
-    }
+    // public enum ShootInput {
+    //     Started,
+    //     Canceled,
+    //     None
+    // }
 }

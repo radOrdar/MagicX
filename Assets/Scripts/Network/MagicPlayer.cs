@@ -3,12 +3,6 @@ using Mirror;
 using UnityEngine;
 
 public class MagicPlayer : NetworkBehaviour {
-    public enum CharacterType {
-        None = -1,
-        Banana = 0,
-        Kiwi = 1
-    }
-
     [SyncVar(hook = nameof(AuthorityHandlePartyOwnerStateUpdated))]
     public bool isPartyOwner;
 

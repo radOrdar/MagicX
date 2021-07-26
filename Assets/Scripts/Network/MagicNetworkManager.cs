@@ -27,7 +27,7 @@ public class MagicNetworkManager : NetworkManager {
         if (Players.Count < 2) { return; }
 
         foreach (var player in Players) {
-            if (player.chosenCharacterType == MagicPlayer.CharacterType.None) {
+            if (player.chosenCharacterType == CharacterType.None) {
                 return;
             }
         }
