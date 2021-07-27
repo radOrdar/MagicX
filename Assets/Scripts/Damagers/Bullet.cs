@@ -2,12 +2,13 @@ using Mirror;
 using UnityEngine;
 
 public class Bullet : NetworkBehaviour, IDamageable {
-    [SerializeField] private int damageToDeal = 20;
+    // [SerializeField] private int damageToDeal = 20;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private ParticleSystem explosion;
 
     [SyncVar] private Vector2 startSpeed;
     private GameObject owner;
+    private float damageToDeal;
 
     public void Start() {
         rb.AddForce(startSpeed, ForceMode2D.Impulse);
@@ -22,9 +23,10 @@ public class Bullet : NetworkBehaviour, IDamageable {
         rb.MoveRotation(Mathf.Atan2(currentVelocity.y, currentVelocity.x) * Mathf.Rad2Deg);
     }
 
-    public void Initialize(Vector2 speed, GameObject owner) {
+    public void Initialize(Vector2 speed, GameObject owner, float damageToDeal) {
         startSpeed = speed;
         this.owner = owner;
+        this.damageToDeal = damageToDeal;
     }
 
     public override void OnStopClient() {
@@ -56,7 +58,7 @@ public class Bullet : NetworkBehaviour, IDamageable {
 
     #endregion
 
-    public int GetDamage() {
+    public float GetDamage() {
         return damageToDeal;
     }
 

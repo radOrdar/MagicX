@@ -2,10 +2,12 @@ using UnityEngine.InputSystem;
 
 public class KiwiInputController : BaseCharacterInputController {
     private ReturnDamageAbility returnDamageAbility;
+    private FuryShootingAbility furyShootingAbility;
 
     public override void OnStartAuthority() {
         base.OnStartAuthority();
         returnDamageAbility = GetComponent<ReturnDamageAbility>();
+        furyShootingAbility = GetComponent<FuryShootingAbility>();
     }
 
     public override void OnShoot(InputAction.CallbackContext ctx) {
@@ -16,9 +18,15 @@ public class KiwiInputController : BaseCharacterInputController {
         }
     }
 
-    public void OnReturnDmg(InputAction.CallbackContext ctx) {
+    public void OnReturnDmgAbility(InputAction.CallbackContext ctx) {
         if (ctx.canceled) {
-            returnDamageAbility.ShootInputVal = InputType.Canceled;
+            returnDamageAbility.InputVal = InputType.Canceled;
+        }
+    }
+
+    public void OnFuryAbility(InputAction.CallbackContext ctx) {
+        if (ctx.canceled) {
+            furyShootingAbility.InputVal = InputType.Canceled;
         }
     }
 }

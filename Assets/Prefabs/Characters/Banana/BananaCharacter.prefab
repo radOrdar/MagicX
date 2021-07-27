@@ -449,6 +449,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.02
+  dmgBullet: 25
   projSpeed: 30
   coolDownTime: 3
   bulletsPool: 2

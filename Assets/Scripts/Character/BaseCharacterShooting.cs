@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public abstract class BaseCharacterShooting : NetworkBehaviour {
+    [SerializeField] protected float dmgBullet;
     [SerializeField] private float projSpeed = 20;
     [SerializeField] private float coolDownTime = 3;
     [SerializeField] private int bulletsPool = 2;
@@ -20,7 +21,7 @@ public abstract class BaseCharacterShooting : NetworkBehaviour {
     public InputType ShootInputVal { protected get; set; } = InputType.None;
 
     [SyncVar(hook = nameof(HandleCurrentBulletChange))]
-    private int currentBullets;
+    protected int currentBullets;
     private List<GameObject> bulletIndicators;
     private Camera mainCamera;
 
@@ -119,12 +120,12 @@ public abstract class BaseCharacterShooting : NetworkBehaviour {
     #region Server
 
     [Command]
-    public void CmdShoot(Vector3 shootPos, Vector3 shootDir) {
+    protected void CmdShootOneBullet(Vector3 shootPos, Vector3 shootDir, float dmg) {
         if (currentBullets <= 0) { return; }
 
         currentBullets--;
         GameObject proj = Instantiate(pfBullet, shootPos, Quaternion.Euler(new Vector3(0, 0, Mathf.Atan2(shootDir.y, shootDir.x) * Mathf.Rad2Deg)));
-        proj.GetComponent<Bullet>().Initialize(shootDir * projSpeed, gameObject);
+        proj.GetComponent<Bullet>().Initialize(shootDir * projSpeed, gameObject, dmg);
         NetworkServer.Spawn(proj, connectionToClient);
 
         RpcPlayShootEffect();

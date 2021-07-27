@@ -8,8 +8,8 @@ public class Health : NetworkBehaviour {
 
     [SyncVar(hook = nameof(HandleHealthUpdated))]
     private float currentHealth;
-    private CinemachineImpulseSource impulseSource; 
-    
+    private CinemachineImpulseSource impulseSource; //TODO not best place to handle impulses 
+
     public event Action<float, float> ClientOnHealthUpdated;
 
     public override void OnStartAuthority() {
@@ -30,10 +30,13 @@ public class Health : NetworkBehaviour {
         currentHealth = maxHealth;
     }
 
+    [Command]
+    public void CmdDealDmgNotKillable(float damageAmount) {
+        currentHealth = Mathf.Max(currentHealth - damageAmount, 0);
+    }
+
     [Server]
     public void DealDamage(float damageAmount) {
-        if (currentHealth == 0) { return; }
-
         currentHealth = Mathf.Max(currentHealth - damageAmount, 0);
 
         if (currentHealth == 0) {

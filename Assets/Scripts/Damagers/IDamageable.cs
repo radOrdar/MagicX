@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
 public interface IDamageable {
-    int GetDamage();
+    float GetDamage();
     GameObject GetOwner();
 }
