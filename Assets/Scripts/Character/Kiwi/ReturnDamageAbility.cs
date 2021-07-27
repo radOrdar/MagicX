@@ -3,7 +3,7 @@ using Mirror;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ReturnDamage : NetworkBehaviour {
+public class ReturnDamageAbility : NetworkBehaviour {
     [SerializeField] private float durationTime;
     [SerializeField] private float coolDownTime;
 
@@ -27,7 +27,6 @@ public class ReturnDamage : NetworkBehaviour {
 
     [ServerCallback]
     private void OnTriggerEnter2D(Collider2D other) {
-        Debug.Log("Trigger");
         if (!isActive) { return; }
 
         if (other.TryGetComponent(out NetworkIdentity identity)) {
