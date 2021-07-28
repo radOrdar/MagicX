@@ -1,5 +1,5 @@
 {
-    "name": "PlayerControl",
+    "name": "BananaControl",
     "maps": [
         {
             "name": "Keyboard&Mouse",
@@ -25,6 +25,14 @@
                     "name": "Shoot",
                     "type": "Button",
                     "id": "3aaecaf5-08dc-4fd5-851b-9280eeda0d94",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "FastShootSlowMove",
+                    "type": "Button",
+                    "id": "98aa23b9-ade9-462c-85d6-ee32415f7aea",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -83,6 +91,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f5ea3d77-cd06-4f8c-992c-e18acaed4ad9",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "FastShootSlowMove",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

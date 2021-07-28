@@ -1,10 +1,8 @@
-using System;
 using System.Collections;
 using Mirror;
 using UnityEngine;
 
 public abstract class BaseCharacterMovement : NetworkBehaviour {
-   
     // [Header("Shift Params")]
     // [SerializeField] private bool enableShiftCooldown;
     // [SerializeField] private int shiftForce;
@@ -13,7 +11,9 @@ public abstract class BaseCharacterMovement : NetworkBehaviour {
     [Header("Movement params")]
     [SerializeField] private float moveSpeed;
     [SerializeField] private float jumpSpeed;
-    
+
+    private float moveSpeedMultiplier = 1;
+
     private Rigidbody2D rb;
     private Animator animator;
 
@@ -22,17 +22,11 @@ public abstract class BaseCharacterMovement : NetworkBehaviour {
         animator = GetComponent<Animator>();
     }
 
-    public bool JumpInput {
-        private get;
-        set;
-    }
+    public bool JumpInput { private get; set; }
     private int jumpCounter;
     private bool isGrounded;
 
-    public float MoveInput {
-        private get;
-        set;
-    }
+    public float MoveInput { private get; set; }
     private bool isMoveDisabled;
 
     // private bool shiftIsReady = true;
@@ -45,6 +39,7 @@ public abstract class BaseCharacterMovement : NetworkBehaviour {
     [ClientCallback]
     private void OnCollisionEnter2D(Collision2D other) {
         if (!hasAuthority) { return; }
+
         if (other.collider.CompareTag("Floor")) {
             if (updateGroundRoutine != null) {
                 StopCoroutine(updateGroundRoutine);
@@ -59,14 +54,16 @@ public abstract class BaseCharacterMovement : NetworkBehaviour {
     [ClientCallback]
     private void OnCollisionExit2D(Collision2D other) {
         if (!hasAuthority) { return; }
+
         if (other.collider.CompareTag("Floor")) {
             updateGroundRoutine = StartCoroutine(nameof(UpdateGroundedFlagRoutine));
         }
     }
-    
+
     [ClientCallback]
     private void FixedUpdate() {
         if (!hasAuthority) { return; }
+
         Move();
         Jump();
         Flip();
@@ -82,7 +79,7 @@ public abstract class BaseCharacterMovement : NetworkBehaviour {
     private void Move() {
         if (isMoveDisabled) { return; }
 
-        rb.velocity = new Vector2(MoveInput * moveSpeed * Time.fixedDeltaTime, rb.velocity.y);
+        rb.velocity = new Vector2(MoveInput * moveSpeed * moveSpeedMultiplier * Time.fixedDeltaTime, rb.velocity.y);
     }
 
     private void Jump() {
@@ -108,10 +105,20 @@ public abstract class BaseCharacterMovement : NetworkBehaviour {
         if (velocityX < 0) {
             transform.localScale = new Vector3(-1, 1, 1);
         }
-        
+
         if (velocityX > 0) {
             transform.localScale = new Vector3(1, 1, 1);
         }
+    }
+
+    public void SlowMovement(float duration, float multiplier) {
+        StartCoroutine(SlowMovementRoutine(duration, multiplier));
+    }
+
+    private IEnumerator SlowMovementRoutine(float duration, float multiplier) {
+        moveSpeedMultiplier = multiplier;
+        yield return new WaitForSeconds(duration);
+        moveSpeedMultiplier = 1;
     }
 
     // private IEnumerator ShiftCooldownCoroutine() {
@@ -127,8 +134,8 @@ public abstract class BaseCharacterMovement : NetworkBehaviour {
     //     yield return new WaitForSeconds(.1f);
     //     isMoveDisabled = false;
     // }
-    
-    
+
+
     // private void Shift() {
     //     if (!shiftInput || !shiftIsReady) { return; }
     //

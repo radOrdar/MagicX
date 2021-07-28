@@ -3,12 +3,12 @@ using Mirror;
 using UnityEngine;
 
 public abstract class BaseDurationAbility : BaseCooldownAbility {
-    [SerializeField] private float durationTime;
+    [SerializeField] protected float durationTime;
     [SerializeField] private SpriteRenderer durationVisualRenderer;
 
     [field: SyncVar] public bool IsActive { get; private set; }
 
-    protected IEnumerator DurationRoutine() {
+    private IEnumerator DurationRoutine() {
         IsActive = true;
         yield return new WaitForSeconds(durationTime);
         IsActive = false;
@@ -21,13 +21,13 @@ public abstract class BaseDurationAbility : BaseCooldownAbility {
     }
 
     [ClientRpc]
-    private void ClientShieldVisualRoutine() {
+    private void ClientDurationVisualRoutine() {
         StartCoroutine(nameof(DurationVisualRoutine));
     }
 
     protected override void UseAllBaseRoutines() {
         base.UseAllBaseRoutines();
-        ClientShieldVisualRoutine();
+        ClientDurationVisualRoutine();
         StartCoroutine(nameof(DurationRoutine));
     }
 }

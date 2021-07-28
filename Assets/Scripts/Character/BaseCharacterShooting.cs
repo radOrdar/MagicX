@@ -11,7 +11,7 @@ public abstract class BaseCharacterShooting : NetworkBehaviour {
     [SerializeField] private float coolDownTime = 3;
     [SerializeField] private int bulletsPool = 2;
     [SerializeField] protected Transform spawnProjTrans;
-    [SerializeField] private GameObject pfBullet;
+    [SerializeField] private GameObject pfDefaultBullet;
     [SerializeField] private Transform handAndGunToRotate;
     [SerializeField] private Image magazineReloadIndicator;
     [SerializeField] private GameObject bulletIndicatorPanel;
@@ -124,7 +124,7 @@ public abstract class BaseCharacterShooting : NetworkBehaviour {
         if (currentBullets <= 0) { return; }
 
         currentBullets--;
-        GameObject proj = Instantiate(pfBullet, shootPos, Quaternion.Euler(new Vector3(0, 0, Mathf.Atan2(shootDir.y, shootDir.x) * Mathf.Rad2Deg)));
+        GameObject proj = Instantiate(pfDefaultBullet, shootPos, Quaternion.Euler(new Vector3(0, 0, Mathf.Atan2(shootDir.y, shootDir.x) * Mathf.Rad2Deg)));
         proj.GetComponent<Bullet>().Initialize(shootDir * projSpeed, gameObject, dmg);
         NetworkServer.Spawn(proj, connectionToClient);
 

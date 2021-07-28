@@ -17,6 +17,7 @@ public abstract class BaseCooldownAbility : NetworkBehaviour {
 
         InputVal = InputType.None;
         if (isReady) {
+            TriggerAction();
             CmdActivate();
         }
     }
@@ -27,6 +28,9 @@ public abstract class BaseCooldownAbility : NetworkBehaviour {
 
         UseAllBaseRoutines();
     }
+
+    /// Override if needed to perform instant action like shooting
+    protected virtual void TriggerAction() { }
 
     protected virtual void UseAllBaseRoutines() {
         ClientReloadIndicatorRoutine();
@@ -44,7 +48,7 @@ public abstract class BaseCooldownAbility : NetworkBehaviour {
         isReady = true;
     }
 
-    protected IEnumerator CooldownIndicatorRoutine() {
+    private IEnumerator CooldownIndicatorRoutine() {
         cooldownIndicator.fillAmount = 0;
         cooldownIndicator.gameObject.SetActive(true);
         float startTime = Time.time;
