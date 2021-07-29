@@ -1633,7 +1633,8 @@ MonoBehaviour:
   pfBullet: {fileID: 0}
   dmgBullet: 0
   bulletSpeed: 0
-  slowMultiplier: 0
+  moveSlowMultiplier: 0
+  jumpSlowMultiplier: 0
   spawnProjTrans: {fileID: 0}
 --- !u!114 &998212921
 MonoBehaviour:

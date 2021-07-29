@@ -5,7 +5,8 @@ public class FastShotSelfSlowAbility : BaseDurationAbility {
     [SerializeField] private GameObject pfBullet;
     [SerializeField] private float dmgBullet;
     [SerializeField] private float bulletSpeed;
-    [SerializeField] private float slowMultiplier;
+    [SerializeField] private float moveSlowMultiplier;
+    [SerializeField] private float jumpSlowMultiplier;
     [SerializeField] private Transform spawnProjTrans;
 
     private BananaMovement bananaMovement;
@@ -17,7 +18,8 @@ public class FastShotSelfSlowAbility : BaseDurationAbility {
     protected override void TriggerAction() {
         base.TriggerAction();
 
-        bananaMovement.SlowMovement(durationTime, slowMultiplier);
+        bananaMovement.SlowMovement(durationTime, moveSlowMultiplier);
+        bananaMovement.SlowJump(durationTime, jumpSlowMultiplier);
 
         CmdShoot(spawnProjTrans.position, spawnProjTrans.right, dmgBullet);
 

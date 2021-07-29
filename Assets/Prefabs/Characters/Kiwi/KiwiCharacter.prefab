@@ -820,12 +820,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c860930a7f97204dbd19c3952d7ebe4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteRenderer: {fileID: 3784154246906092529}
-  health: {fileID: 7359965614406593287}
   healthBarImage: {fileID: 1478443760630510688}
-  colorToChangeWhenGainDamage:
-    serializedVersion: 2
-    rgba: 4278212351
+  _flashMaterial: {fileID: 2100000, guid: 920000479a4200342911befa8e6a59a1, type: 2}
 --- !u!114 &7292172674405402239
 MonoBehaviour:
   m_ObjectHideFlags: 0

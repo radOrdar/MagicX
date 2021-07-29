@@ -27,7 +27,11 @@ public abstract class BaseDurationAbility : BaseCooldownAbility {
 
     protected override void UseAllBaseRoutines() {
         base.UseAllBaseRoutines();
-        ClientDurationVisualRoutine();
         StartCoroutine(nameof(DurationRoutine));
+        if (durationVisualRenderer != null) {
+            ClientDurationVisualRoutine();
+        } else {
+            Debug.Log("durationVisualRenderer is null");
+        }
     }
 }

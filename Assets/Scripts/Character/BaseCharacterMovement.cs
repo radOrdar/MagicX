@@ -13,6 +13,7 @@ public abstract class BaseCharacterMovement : NetworkBehaviour {
     [SerializeField] private float jumpSpeed;
 
     private float moveSpeedMultiplier = 1;
+    private float jumpSpeedMultiplier = 1;
 
     private Rigidbody2D rb;
     private Animator animator;
@@ -89,11 +90,11 @@ public abstract class BaseCharacterMovement : NetworkBehaviour {
 
         Vector2 velocity = rb.velocity;
         if (isGrounded) {
-            rb.velocity = new Vector2(velocity.x, jumpSpeed);
+            rb.velocity = new Vector2(velocity.x, jumpSpeed * jumpSpeedMultiplier);
             jumpCounter = 1;
             animator.SetTrigger("Jump");
         } else if (jumpCounter == 1) {
-            rb.velocity = new Vector2(velocity.x, jumpSpeed);
+            rb.velocity = new Vector2(velocity.x, jumpSpeed * jumpSpeedMultiplier);
             animator.SetTrigger("Jump");
             jumpCounter = 2;
         }
@@ -119,6 +120,16 @@ public abstract class BaseCharacterMovement : NetworkBehaviour {
         moveSpeedMultiplier = multiplier;
         yield return new WaitForSeconds(duration);
         moveSpeedMultiplier = 1;
+    }
+
+    public void SlowJump(float duration, float multiplier) {
+        StartCoroutine(SlowJumpRoutine(duration, multiplier));
+    }
+
+    private IEnumerator SlowJumpRoutine(float duration, float multiplier) {
+        jumpSpeedMultiplier = multiplier;
+        yield return new WaitForSeconds(duration);
+        jumpSpeedMultiplier = 1;
     }
 
     // private IEnumerator ShiftCooldownCoroutine() {

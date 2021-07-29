@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 4466578641975273186}
   - component: {fileID: 1094119035416435212}
   - component: {fileID: 7031232780764442960}
-  - component: {fileID: 8172004010225619778}
+  - component: {fileID: 7913155853043109194}
   m_Layer: 6
   m_Name: SkillsCooldownCanvas
   m_TagString: Untagged
@@ -106,6 +106,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8303294848358802534}
+  - {fileID: 8461615301735955030}
   m_Father: {fileID: 3784154246906092528}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -158,23 +159,18 @@ MonoBehaviour:
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
   m_PresetInfoIsWorld: 1
---- !u!114 &8172004010225619778
-MonoBehaviour:
+--- !u!225 &7913155853043109194
+CanvasGroup:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 271642205982240304}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &588940818747607445
 GameObject:
   m_ObjectHideFlags: 0
@@ -386,6 +382,7 @@ GameObject:
   - component: {fileID: 7893736175684424699}
   - component: {fileID: 8199482182330946248}
   - component: {fileID: 7650941945282824051}
+  - component: {fileID: 7040984942299721692}
   - component: {fileID: -1580607743569591321}
   - component: {fileID: 7359965614406593287}
   - component: {fileID: -6313955724757140186}
@@ -614,6 +611,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 98aa23b9-ade9-462c-85d6-ee32415f7aea
     m_ActionName: Keyboard&Mouse/FastShootSlowMove[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7893736175684424699}
+        m_TargetAssemblyTypeName: BananaInputController, Assembly-CSharp
+        m_MethodName: OnInvisibility
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: d154fdbe-09a7-4231-a2a9-41e775b08721
+    m_ActionName: Keyboard&Mouse/Invisibility[/Keyboard/s]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Keyboard&Mouse
@@ -682,8 +695,38 @@ MonoBehaviour:
   pfBullet: {fileID: 8779774710099683455, guid: df8d23699ca17b84e8a5ab28fd29a850, type: 3}
   dmgBullet: 30
   bulletSpeed: 50
-  slowMultiplier: 0.5
+  moveSlowMultiplier: 0.5
+  jumpSlowMultiplier: 0.7
   spawnProjTrans: {fileID: 5014805027652582736}
+--- !u!114 &7040984942299721692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3784154246906092538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5e28853ef4b27e4785875b10130b390, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  coolDownTime: 10
+  cooldownIndicator: {fileID: 4883863402796768327}
+  durationTime: 3
+  durationVisualRenderer: {fileID: 0}
+  canvasGroupsToHide:
+  - {fileID: 6559461155741931384}
+  - {fileID: 7913155853043109194}
+  - {fileID: 5100763590082296928}
+  renderersToHide:
+  - {fileID: 3784154246906092529}
+  - {fileID: 3481076717091250397}
+  - {fileID: 3710818293402765888}
+  - {fileID: 8939098223673853548}
+  partialTransparency: 0.5
+  onEnemyFadeOutDuration: 1
 --- !u!114 &-1580607743569591321
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -727,12 +770,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c860930a7f97204dbd19c3952d7ebe4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteRenderer: {fileID: 3784154246906092529}
-  health: {fileID: 7359965614406593287}
   healthBarImage: {fileID: 1478443760630510688}
-  colorToChangeWhenGainDamage:
-    serializedVersion: 2
-    rgba: 4278212351
+  _flashMaterial: {fileID: 2100000, guid: 920000479a4200342911befa8e6a59a1, type: 2}
 --- !u!114 &7292172674405402239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -890,7 +929,7 @@ GameObject:
   - component: {fileID: 8752648804996247985}
   - component: {fileID: 6847503408480935733}
   - component: {fileID: 4667420322202776157}
-  - component: {fileID: 3815823965457438705}
+  - component: {fileID: 5100763590082296928}
   m_Layer: 5
   m_Name: GunClipCanvas
   m_TagString: Untagged
@@ -963,23 +1002,18 @@ MonoBehaviour:
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
   m_PresetInfoIsWorld: 1
---- !u!114 &3815823965457438705
-MonoBehaviour:
+--- !u!225 &5100763590082296928
+CanvasGroup:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4445742092652970047}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &5216407347957678331
 GameObject:
   m_ObjectHideFlags: 0
@@ -1224,7 +1258,7 @@ GameObject:
   - component: {fileID: 429258611673040335}
   - component: {fileID: 8342938339314772732}
   m_Layer: 6
-  m_Name: FastShotIndicator
+  m_Name: FastShotCdIndicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1322,6 +1356,81 @@ Transform:
   m_Father: {fileID: 3784154246906092528}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8390815295943614855
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8461615301735955030}
+  - component: {fileID: 7510952761259845924}
+  - component: {fileID: 4883863402796768327}
+  m_Layer: 6
+  m_Name: InvisCdIndicator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &8461615301735955030
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8390815295943614855}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4466578641975273186}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 0.748, y: 0.012}
+  m_SizeDelta: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &7510952761259845924
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8390815295943614855}
+  m_CullTransparentMesh: 1
+--- !u!114 &4883863402796768327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8390815295943614855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
+  m_Type: 3
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &8586783610800513807
 GameObject:
   m_ObjectHideFlags: 0
@@ -1404,6 +1513,7 @@ GameObject:
   - component: {fileID: 9094061576615005195}
   - component: {fileID: 4587524349112863888}
   - component: {fileID: 2448596042945012672}
+  - component: {fileID: 6559461155741931384}
   m_Layer: 6
   m_Name: HealthbarCanvas
   m_TagString: Untagged
@@ -1476,6 +1586,18 @@ MonoBehaviour:
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
   m_PresetInfoIsWorld: 1
+--- !u!225 &6559461155741931384
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8904034504318959532}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1001 &8297714230092764520
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1541,13 +1663,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06ec809adb517d948a82f52dc0d72d37, type: 3}
---- !u!4 &2700974299825183853 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6223041138264639749, guid: 06ec809adb517d948a82f52dc0d72d37, type: 3}
-  m_PrefabInstance: {fileID: 8297714230092764520}
-  m_PrefabAsset: {fileID: 0}
 --- !u!198 &8841763617714611668 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 689936997304250556, guid: 06ec809adb517d948a82f52dc0d72d37, type: 3}
+  m_PrefabInstance: {fileID: 8297714230092764520}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2700974299825183853 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6223041138264639749, guid: 06ec809adb517d948a82f52dc0d72d37, type: 3}
   m_PrefabInstance: {fileID: 8297714230092764520}
   m_PrefabAsset: {fileID: 0}

@@ -3,18 +3,19 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class CharacterVisual : MonoBehaviour {
-
-    [SerializeField] private SpriteRenderer spriteRenderer;
-    [SerializeField] private Health health;
     [SerializeField] private Image healthBarImage;
-    [SerializeField] private Color32 colorToChangeWhenGainDamage = Color.red;
+    [SerializeField] private Material _flashMaterial;
 
-    private Color defaultColor;
-    private bool attackColorCurrentlyChanging;
+    private SpriteRenderer spriteRenderer;
+    private Health health;
+    private Material defaultMaterial;
+    private bool isColorBeingChanging;
 
     private void OnEnable() {
+        health = GetComponent<Health>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        defaultMaterial = spriteRenderer.material;
         health.ClientOnHealthUpdated += HandleHealthUpdated;
-        defaultColor = spriteRenderer.color;
     }
 
     private void OnDestroy() {
@@ -23,16 +24,16 @@ public class CharacterVisual : MonoBehaviour {
 
     private void HandleHealthUpdated(float currentHealth, float maxHealth) {
         healthBarImage.fillAmount = currentHealth / maxHealth;
-        if (!attackColorCurrentlyChanging) {
+        if (!isColorBeingChanging) {
             StartCoroutine(ChangeColorRoutine());
         }
     }
 
     private IEnumerator ChangeColorRoutine() {
-        attackColorCurrentlyChanging = true;
-        spriteRenderer.color = colorToChangeWhenGainDamage;
+        isColorBeingChanging = true;
+        spriteRenderer.material = _flashMaterial;
         yield return new WaitForSeconds(.2f);
-        spriteRenderer.color = defaultColor;
-        attackColorCurrentlyChanging = false;
+        spriteRenderer.material = defaultMaterial;
+        isColorBeingChanging = false;
     }
 }

@@ -39,6 +39,11 @@ public abstract class BaseCooldownAbility : NetworkBehaviour {
 
     [ClientRpc]
     private void ClientReloadIndicatorRoutine() {
+        if (cooldownIndicator == null) {
+            Debug.Log("cooldownIndicator is null");
+            return;
+        }
+
         StartCoroutine(nameof(CooldownIndicatorRoutine));
     }
 
