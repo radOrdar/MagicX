@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Mirror;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -32,7 +33,10 @@ public class MagicNetworkManager : NetworkManager {
             }
         }
 
-        ServerChangeScene("Ragim 1");
+        string selectedLevel = Players.First(p => p.isPartyOwner).SelectedLevel;
+        if (!selectedLevel.StartsWith("GameLevel")) { return; }
+
+        ServerChangeScene(selectedLevel);
     }
 
     public override void OnServerAddPlayer(NetworkConnection conn) {
@@ -47,7 +51,7 @@ public class MagicNetworkManager : NetworkManager {
     }
 
     public override void OnServerSceneChanged(string sceneName) {
-        if (SceneManager.GetActiveScene().name.StartsWith("Ragim 1")) {
+        if (SceneManager.GetActiveScene().name.StartsWith("GameLevel")) {
             foreach (MagicPlayer player in Players) {
                 GameObject characterInstance = Instantiate(
                     charPrefabs[(int) player.chosenCharacterType],

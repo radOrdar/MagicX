@@ -7,13 +7,17 @@ public class MagicPlayer : NetworkBehaviour {
     public bool isPartyOwner;
 
     [field: SyncVar(hook = nameof(ClientHandleChosenCharacter))]
-    public CharacterType chosenCharacterType { get; set; } = CharacterType.None;
+    public CharacterType chosenCharacterType { get; private set; } = CharacterType.None;
 
     [field: SyncVar(hook = nameof(ClientHandleDisplayNameUpdated))]
     public string DisplayName { get; [Server] set; }
 
+    [field: SyncVar(hook = nameof(ClientHandleSelectedLevel))]
+    public string SelectedLevel { get; private set; }
+
     public static event Action ClientOnInfoUpdated;
     public static event Action<bool> AuthorityOnPartyOwnerStateUpdated;
+    public static event Action<string> OnLevelSelected;
 
     public override void OnStartServer() {
         DontDestroyOnLoad(gameObject);
@@ -41,8 +45,20 @@ public class MagicPlayer : NetworkBehaviour {
         chosenCharacterType = (CharacterType) val;
     }
 
+    [Command]
+    public void CmdSelectLevel(string levelName) {
+        if (!isPartyOwner) { return; }
+
+        SelectedLevel = levelName;
+    }
+
     private void ClientHandleDisplayNameUpdated(string oldDisplayName, string newDisplayName) {
         ClientOnInfoUpdated?.Invoke();
+    }
+
+    private void ClientHandleSelectedLevel(string oldLevel, string newLevel) {
+        SelectedLevel = newLevel;
+        OnLevelSelected?.Invoke(newLevel);
     }
 
     private void ClientHandleChosenCharacter(CharacterType oldVal, CharacterType newVal) {

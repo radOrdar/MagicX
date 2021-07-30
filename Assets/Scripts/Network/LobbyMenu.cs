@@ -10,21 +10,38 @@ public class LobbyMenu : MonoBehaviour {
     [SerializeField] private GameObject lobbyUi;
     [SerializeField] private TMP_Text[] playerNameTexts = new TMP_Text[2];
     [SerializeField] private TMP_Text[] playerHeroTexts = new TMP_Text[2];
+    [SerializeField] private TMP_Text selectedLevelText;
+    [SerializeField] private GameObject levelSelectionPanel;
+    [SerializeField] private int numOfGameLevels;
 
     private void Start() {
         MagicPlayer.AuthorityOnPartyOwnerStateUpdated += AuthorityHandlePartyOwnerStateUpdated;
         MagicPlayer.ClientOnInfoUpdated += ClientHandleInfoUpdated;
+        MagicPlayer.OnLevelSelected += ClientHandleSelectedLevel;
         MagicNetworkManager.OnClientConnected += ClientHandleClientConnected;
+
+        TMP_Dropdown dropdown = levelSelectionPanel.transform.GetChild(1).GetComponent<TMP_Dropdown>();
+        var optionNames = new List<string> {"-"};
+        for (int i = 1; i <= numOfGameLevels; i++) {
+            optionNames.Add($"GameLevel{i}");
+        }
+
+        optionNames.AddRange(optionNames);
+        // toDeleteTExt.text = optionNames.Count.ToString();
+        dropdown.AddOptions(optionNames);
+        dropdown.value = 0;
     }
 
     private void OnDestroy() {
         MagicPlayer.AuthorityOnPartyOwnerStateUpdated -= AuthorityHandlePartyOwnerStateUpdated;
         MagicPlayer.ClientOnInfoUpdated -= ClientHandleInfoUpdated;
+        MagicPlayer.OnLevelSelected -= ClientHandleSelectedLevel;
         MagicNetworkManager.OnClientConnected -= ClientHandleClientConnected;
     }
 
     private void AuthorityHandlePartyOwnerStateUpdated(bool state) {
         startGameButton.gameObject.SetActive(state);
+        levelSelectionPanel.gameObject.SetActive(state);
     }
 
     private void ClientHandleInfoUpdated() {
@@ -39,7 +56,17 @@ public class LobbyMenu : MonoBehaviour {
             playerHeroTexts[i].text = "-";
         }
 
-        startGameButton.interactable = players.Count >= 2 && !players.Any(p => p.chosenCharacterType < 0);
+        startGameButton.interactable = players.Count >= 2
+                                       && !players.Any(p => p.chosenCharacterType < 0)
+                                       && selectedLevelText.text.StartsWith("GameLevel");
+    }
+
+    private void ClientHandleSelectedLevel(string newLevel) {
+        selectedLevelText.text = newLevel;
+        List<MagicPlayer> players = ((MagicNetworkManager) NetworkManager.singleton).Players;
+        startGameButton.interactable = players.Count >= 2
+                                       && !players.Any(p => p.chosenCharacterType < 0)
+                                       && selectedLevelText.text.StartsWith("GameLevel");
     }
 
     private void ClientHandleClientConnected() {
@@ -52,5 +79,10 @@ public class LobbyMenu : MonoBehaviour {
 
     public void SelectCharacter(int val) {
         NetworkClient.connection.identity.GetComponent<MagicPlayer>().CmdChoseCharacter(val - 1);
+    }
+
+    public void SelectLevel(int val) {
+        string selectedLevel = val == 0 ? "-" : $"GameLevel{val}";
+        NetworkClient.connection.identity.GetComponent<MagicPlayer>().CmdSelectLevel(selectedLevel);
     }
 }
