@@ -23,11 +23,9 @@ public class LobbyMenu : MonoBehaviour {
         TMP_Dropdown dropdown = levelSelectionPanel.transform.GetChild(1).GetComponent<TMP_Dropdown>();
         var optionNames = new List<string> {"-"};
         for (int i = 1; i <= numOfGameLevels; i++) {
-            optionNames.Add($"GameLevel{i}");
+            optionNames.Add($"GameLevel {i}");
         }
 
-        optionNames.AddRange(optionNames);
-        // toDeleteTExt.text = optionNames.Count.ToString();
         dropdown.AddOptions(optionNames);
         dropdown.value = 0;
     }
@@ -82,7 +80,7 @@ public class LobbyMenu : MonoBehaviour {
     }
 
     public void SelectLevel(int val) {
-        string selectedLevel = val == 0 ? "-" : $"GameLevel{val}";
+        string selectedLevel = val == 0 ? "-" : $"GameLevel {val}";
         NetworkClient.connection.identity.GetComponent<MagicPlayer>().CmdSelectLevel(selectedLevel);
     }
 }
