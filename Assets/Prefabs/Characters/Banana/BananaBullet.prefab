@@ -138,9 +138,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.03
-  damageToDeal: 20
   rb: {fileID: 9055069676159172351}
   explosion: {fileID: 689936997304250556, guid: 961ada7554b939e44909811ec03a387a, type: 3}
+  impulseOnCollisionMultiplier: 5000
 --- !u!70 &1871696594956943960
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

@@ -5,13 +5,14 @@ public class Bullet : NetworkBehaviour, IDamageable {
     // [SerializeField] private int damageToDeal = 20;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private ParticleSystem explosion;
+    [SerializeField] private float impulseOnCollisionMultiplier;
 
     [SyncVar] private Vector2 startSpeed;
     private GameObject owner;
     private float damageToDeal;
 
     public void Start() {
-        rb.AddForce(startSpeed, ForceMode2D.Impulse);
+        rb.AddForce(startSpeed * rb.mass, ForceMode2D.Impulse);
     }
 
     private void FixedUpdate() {
@@ -38,9 +39,16 @@ public class Bullet : NetworkBehaviour, IDamageable {
 
     [ServerCallback]
     private void OnTriggerEnter2D(Collider2D other) {
-        if (other.TryGetComponent(out NetworkIdentity identity)) {
-            if (identity.connectionToClient == connectionToClient) {
-                return;
+        // if (other.TryGetComponent(out NetworkIdentity identity)) {
+        //     if (identity.connectionToClient == connectionToClient) {
+        //         return;
+        //     }
+        // }
+        if (other.CompareTag("Floor")) {
+            // var closestPoint = other.ClosestPoint(transform.position);
+            if (other.TryGetComponent(out Rigidbody2D otherRb)) {
+                // otherRb.AddForceAtPosition(transform.right * rb.mass * impulseOnCollisionMultiplier, closestPoint);
+                otherRb.AddForce(transform.right * rb.mass * impulseOnCollisionMultiplier);
             }
         }
 
