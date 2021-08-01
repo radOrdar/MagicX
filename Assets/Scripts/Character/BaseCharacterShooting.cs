@@ -7,11 +7,9 @@ using UnityEngine.UI;
 
 public abstract class BaseCharacterShooting : NetworkBehaviour {
     [SerializeField] protected float dmgBullet;
-    [SerializeField] private float projSpeed = 20;
     [SerializeField] private float coolDownTime = 3;
     [SerializeField] private int bulletsPool = 2;
     [SerializeField] protected Transform spawnProjTrans;
-    [SerializeField] private GameObject pfDefaultBullet;
     [SerializeField] private Transform handAndGunToRotate;
     [SerializeField] private Image magazineReloadIndicator;
     [SerializeField] private GameObject bulletIndicatorPanel;
@@ -124,17 +122,17 @@ public abstract class BaseCharacterShooting : NetworkBehaviour {
         if (currentBullets <= 0) { return; }
 
         currentBullets--;
-        GameObject proj = Instantiate(pfDefaultBullet, shootPos, Quaternion.Euler(new Vector3(0, 0, Mathf.Atan2(shootDir.y, shootDir.x) * Mathf.Rad2Deg)));
-        proj.GetComponent<Bullet>().Initialize(shootDir * projSpeed, gameObject, dmg);
-        NetworkServer.Spawn(proj, connectionToClient);
 
+        SpawnBulletDependOnType(shootPos, shootDir, dmg);
         RpcPlayShootEffect();
         if (currentBullets <= 0) {
             StartCoroutine(ReloadMagazineRoutine());
         }
     }
 
-    private IEnumerator ReloadMagazineRoutine() {
+    protected abstract void SpawnBulletDependOnType(Vector3 shootPos, Vector3 shootDir, float dmg);
+
+    protected IEnumerator ReloadMagazineRoutine() {
         yield return new WaitForSeconds(coolDownTime);
         currentBullets = bulletsPool;
     }

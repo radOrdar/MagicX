@@ -11,7 +11,7 @@ public abstract class BaseCharacterMovement : NetworkBehaviour {
     [Header("Movement params")]
     [SerializeField] private float moveSpeed;
     [SerializeField] private float jumpSpeed;
-    [SerializeField] private LayerMask layerMask;
+    private LayerMask groundLayerMask;
 
     private float moveSpeedMultiplier = 1;
     private float jumpSpeedMultiplier = 1;
@@ -26,6 +26,7 @@ public abstract class BaseCharacterMovement : NetworkBehaviour {
         myRb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         myCollider = GetComponent<BoxCollider2D>();
+        groundLayerMask = LayerMask.GetMask("Floor");
     }
 
     public bool JumpInput { private get; set; }
@@ -56,13 +57,13 @@ public abstract class BaseCharacterMovement : NetworkBehaviour {
         if (!hasAuthority) { return; }
 
         if (other.collider.CompareTag("Floor")) {
-            StartCoroutine(nameof(UpdateGroundedFlagRoutine));
+            StartCoroutine(nameof(UpdateWasGroundedRoutine));
         }
     }
 
-    private IEnumerator UpdateGroundedFlagRoutine() {
+    private IEnumerator UpdateWasGroundedRoutine() {
         wasGrounded = true;
-        yield return new WaitForSeconds(.1f);
+        yield return new WaitForSeconds(.13f);
         wasGrounded = false;
     }
 
@@ -101,20 +102,10 @@ public abstract class BaseCharacterMovement : NetworkBehaviour {
     }
 
     private bool IsGrounded() {
-        Debug.Log("IsGrounds Check");
         float extra = .1f;
         var bounds = myCollider.bounds;
-        RaycastHit2D hit = Physics2D.BoxCast(bounds.center, bounds.size, 0f, Vector2.down, bounds.extents.y + extra, layerMask);
-        Color color;
-        // if (hit.collider == null) {
-        //     color = Color.red;
-        // } else {
-        //     color = Color.green;
-        // }
-        // Debug.DrawRay(bounds.center + new Vector3(bounds.extents.x, 0), Vector2.down * (bounds.extents.y + extra), color);
-        // Debug.DrawRay(bounds.center - new Vector3(bounds.extents.x, 0), Vector2.down * (bounds.extents.y + extra), color);
-        // Debug.DrawRay(bounds.center - new Vector3(bounds.extents.x, bounds.extents.y + extra), Vector2.right * bounds.extents.x, color);
-        // Debug.Log(hit.collider == null);
+        RaycastHit2D hit = Physics2D.BoxCast(bounds.center, new Vector2(bounds.size.x + 2 * extra, bounds.size.y),
+            0f, Vector2.down, bounds.extents.y + extra, groundLayerMask);
         return hit.collider != null;
     }
 

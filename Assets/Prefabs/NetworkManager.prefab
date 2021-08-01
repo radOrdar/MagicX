@@ -72,6 +72,7 @@ MonoBehaviour:
   charPrefabs:
   - {fileID: 3784154246906092538, guid: a82a3c7603964a44a84f8db2f7ad3896, type: 3}
   - {fileID: 3784154246906092538, guid: e93e9f083ea82c04cb87dc0f34501964, type: 3}
+  - {fileID: 3784154246906092538, guid: eea305ccb9c27ff4398eb74bd9a4131e, type: 3}
 --- !u!114 &2909861333191554971
 MonoBehaviour:
   m_ObjectHideFlags: 0

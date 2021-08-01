@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(FuryShootingAbility))]
-public class KiwiShooting : BaseCharacterShooting {
+public class KiwiShooting : BaseShootingProjectile {
     [Tooltip("In seconds")] [SerializeField]
     private float shootingBurstSpeed;
     [SerializeField] private float disperseFactor;

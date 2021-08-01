@@ -47,7 +47,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.3
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -138,9 +138,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.02
-  damageToDeal: 4
   rb: {fileID: 9055069676159172351}
   explosion: {fileID: 689936997304250556, guid: 961ada7554b939e44909811ec03a387a, type: 3}
+  impulseOnCollisionMultiplier: 5000
 --- !u!61 &7113242846316402840
 BoxCollider2D:
   m_ObjectHideFlags: 0

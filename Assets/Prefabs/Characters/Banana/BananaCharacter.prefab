@@ -392,7 +392,6 @@ GameObject:
   - component: {fileID: 1560548166}
   - component: {fileID: -3831304093267303437}
   - component: {fileID: 958989493333421860}
-  - component: {fileID: 3784154246906092531}
   m_Layer: 6
   m_Name: BananaCharacter
   m_TagString: Player
@@ -728,9 +727,6 @@ MonoBehaviour:
   syncInterval: 0.1
   moveSpeed: 300
   jumpSpeed: 15
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 128
 --- !u!114 &7359965614406593287
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -932,22 +928,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.722641, y: 2.0263395}
   m_EdgeRadius: 0
---- !u!70 &3784154246906092531
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3784154246906092538}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 6200000, guid: ece04cd65f14b3a4a932a806cfa8b2cc, type: 2}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.22921753, y: -0.23256195}
-  m_Size: {x: 0.7053356, y: 2.0201576}
-  m_Direction: 0
 --- !u!1 &4445742092652970047
 GameObject:
   m_ObjectHideFlags: 0

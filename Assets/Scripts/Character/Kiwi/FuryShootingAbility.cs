@@ -1,6 +1,5 @@
 using UnityEngine;
 
-[RequireComponent(typeof(BaseCharacterShooting))]
 public class FuryShootingAbility : BaseDurationAbility {
     [SerializeField] private float multiplierDmgToEnemy;
     [SerializeField] private float multiplierDmgSelf;

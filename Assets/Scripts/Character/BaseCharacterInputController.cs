@@ -1,24 +1,25 @@
 using Mirror;
-using UnityEngine;
 using UnityEngine.InputSystem;
 
 public abstract class BaseCharacterInputController : NetworkBehaviour {
-   
-    [SerializeField] protected BaseCharacterMovement characterMovement;
-    [SerializeField] protected BaseCharacterShooting characterShooting;
-    [SerializeField] protected UnityEngine.InputSystem.PlayerInput characterInputAsset;
+    private BaseCharacterMovement characterMovement;
+    protected BaseCharacterShooting characterShooting;
 
     public override void OnStartAuthority() {
-        characterInputAsset.enabled = true;
+        characterMovement = GetComponent<BaseCharacterMovement>();
+        characterShooting = GetComponent<BaseCharacterShooting>();
+        GetComponent<UnityEngine.InputSystem.PlayerInput>().enabled = true;
     }
 
     public void OnMovement(InputAction.CallbackContext ctx) {
         if (!hasAuthority) { return; }
+
         characterMovement.MoveInput = ctx.ReadValue<float>();
     }
 
     public void OnJump(InputAction.CallbackContext ctx) {
         if (!hasAuthority) { return; }
+
         if (ctx.canceled) {
             characterMovement.JumpInput = true;
         }

@@ -80,7 +80,7 @@ public class LobbyMenu : MonoBehaviour {
     }
 
     public void SelectLevel(int val) {
-        string selectedLevel = val == 0 ? "-" : $"GameLevel {val}";
+        string selectedLevel = val == 0 ? "-" : $"GameLevel{val}";
         NetworkClient.connection.identity.GetComponent<MagicPlayer>().CmdSelectLevel(selectedLevel);
     }
 }
