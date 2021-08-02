@@ -8,10 +8,10 @@ using UnityEngine.UI;
 public abstract class BaseCharacterShooting : NetworkBehaviour {
     [SerializeField] protected float dmgBullet;
     [SerializeField] private float coolDownTime = 3;
-    [SerializeField] private int bulletsPool = 2;
+    [SerializeField] protected int bulletsPool = 2;
     [SerializeField] protected Transform spawnProjTrans;
     [SerializeField] private Transform handAndGunToRotate;
-    [SerializeField] private Image magazineReloadIndicator;
+    [SerializeField] protected Image magazineReloadIndicator;
     [SerializeField] private GameObject bulletIndicatorPanel;
     [SerializeField] private GameObject bulletIndicator;
     [SerializeField] private ParticleSystem shootEffect;
@@ -22,7 +22,10 @@ public abstract class BaseCharacterShooting : NetworkBehaviour {
     protected int currentBullets;
     private List<GameObject> bulletIndicators;
     private Camera mainCamera;
+    protected Coroutine reloadMagazineIndicatorRoutine;
+    protected Coroutine reloadMagazineRoutine;
 
+    public int CurrentBullets => currentBullets;
 
     public override void OnStartClient() {
         bulletIndicators = new List<GameObject>(bulletsPool);
@@ -106,7 +109,7 @@ public abstract class BaseCharacterShooting : NetworkBehaviour {
         }
 
         if (newBulletsCount == 0) {
-            StartCoroutine(ReloadMagazineIndicatorRoutine());
+            reloadMagazineIndicatorRoutine = StartCoroutine(nameof(ReloadMagazineIndicatorRoutine));
         }
     }
 
@@ -126,13 +129,13 @@ public abstract class BaseCharacterShooting : NetworkBehaviour {
         SpawnBulletDependOnType(shootPos, shootDir, dmg);
         RpcPlayShootEffect();
         if (currentBullets <= 0) {
-            StartCoroutine(ReloadMagazineRoutine());
+            reloadMagazineRoutine = StartCoroutine(ReloadMagazineRoutine());
         }
     }
 
     protected abstract void SpawnBulletDependOnType(Vector3 shootPos, Vector3 shootDir, float dmg);
 
-    protected IEnumerator ReloadMagazineRoutine() {
+    private IEnumerator ReloadMagazineRoutine() {
         yield return new WaitForSeconds(coolDownTime);
         currentBullets = bulletsPool;
     }

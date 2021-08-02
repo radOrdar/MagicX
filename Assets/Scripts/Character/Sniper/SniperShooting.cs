@@ -30,11 +30,30 @@ public class SniperShooting : BaseCharacterShooting {
         StartCoroutine(ShootTraceRoutine(start, end));
     }
 
+    [ClientRpc]
+    private void StopReloadMagazineIndicatorRoutine() {
+        StopCoroutine(reloadMagazineIndicatorRoutine);
+        magazineReloadIndicator.gameObject.SetActive(false);
+    }
+
     private IEnumerator ShootTraceRoutine(Vector3 start, Vector3 end) {
         lineRenderer.SetPosition(0, start);
         lineRenderer.SetPosition(1, end);
         lineRenderer.enabled = true;
         yield return new WaitForSeconds(.01f);
         lineRenderer.enabled = false;
+    }
+
+    [Server]
+    public void StopReloadMagazineRoutine() {
+        StopCoroutine(reloadMagazineRoutine);
+    }
+
+    [Command]
+    public void FastReload() {
+        if (currentBullets > 0) { return; }
+
+        currentBullets = bulletsPool;
+        StopReloadMagazineIndicatorRoutine();
     }
 }

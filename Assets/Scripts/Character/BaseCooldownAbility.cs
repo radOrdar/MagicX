@@ -18,19 +18,19 @@ public abstract class BaseCooldownAbility : NetworkBehaviour {
         InputVal = InputType.None;
         if (isReady) {
             TriggerAction();
-            CmdActivate();
         }
     }
 
     [Command]
-    private void CmdActivate() {
+    protected virtual void CmdActivate() {
         if (!isReady) { return; }
 
         UseAllBaseRoutines();
     }
 
-    /// Override if needed to perform instant action like shooting
-    protected virtual void TriggerAction() { }
+    protected virtual void TriggerAction() {
+        CmdActivate();
+    }
 
     protected virtual void UseAllBaseRoutines() {
         ClientReloadIndicatorRoutine();
