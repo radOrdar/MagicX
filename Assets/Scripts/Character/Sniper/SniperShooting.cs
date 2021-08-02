@@ -19,7 +19,7 @@ public class SniperShooting : BaseCharacterShooting {
         if (hit.collider == null) { return; }
 
         if (hit.collider.TryGetComponent(out Health health)) {
-            health.DealDamage(dmgBullet);
+            health.DealDamage(dmgBullet, gameObject);
         }
 
         ShowLineOnShoot(shootPos, hit.point);

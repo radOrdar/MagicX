@@ -23,7 +23,7 @@ public class BlockDamager : MonoBehaviour {
         // Debug.Log(other.contacts.Length);
         // Debug.Log(other.relativeVelocity.magnitude);
         if (contactPoint2Ds[0].normal.y > 0) {
-            health.DealDamage(other.relativeVelocity.magnitude * rb.mass * dmgMultiplier);
+            health.DealDamage(other.relativeVelocity.magnitude * rb.mass * dmgMultiplier, gameObject);
         }
 
         Physics2D.Raycast(transform.position, transform.forward);

@@ -1,8 +1,7 @@
 using Mirror;
 using UnityEngine;
 
-public class Bullet : NetworkBehaviour, IDamageable {
-    // [SerializeField] private int damageToDeal = 20;
+public class Bullet : NetworkBehaviour {
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private ParticleSystem explosion;
     [SerializeField] private float impulseOnCollisionMultiplier;
@@ -53,7 +52,7 @@ public class Bullet : NetworkBehaviour, IDamageable {
         }
 
         if (other.TryGetComponent(out Health health)) {
-            health.DealDamage(damageToDeal);
+            health.DealDamage(damageToDeal, owner);
         }
 
         DestroySelf();
@@ -65,12 +64,4 @@ public class Bullet : NetworkBehaviour, IDamageable {
     }
 
     #endregion
-
-    public float GetDamage() {
-        return damageToDeal;
-    }
-
-    public GameObject GetOwner() {
-        return owner;
-    }
 }

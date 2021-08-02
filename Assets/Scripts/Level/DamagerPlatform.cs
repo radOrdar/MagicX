@@ -1,4 +1,3 @@
-using System;
 using Mirror;
 using UnityEngine;
 
@@ -8,7 +7,7 @@ public class DamagerPlatform : MonoBehaviour {
     [ServerCallback]
     private void OnCollisionStay2D(Collision2D other) {
         if (other.gameObject.TryGetComponent(out Health health)) {
-            health.DealDamage(damagePerSecondToDeal * Time.deltaTime);
+            health.DealDamage(damagePerSecondToDeal * Time.deltaTime, gameObject);
         }
     }
 }

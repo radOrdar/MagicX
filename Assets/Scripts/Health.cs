@@ -11,6 +11,7 @@ public class Health : NetworkBehaviour {
     private CinemachineImpulseSource impulseSource; //TODO not best place to handle impulses 
 
     public event Action<float, float> ClientOnHealthUpdated;
+    public event Action<GameObject, float> ServerOnHealthUpdated;
 
     public override void OnStartAuthority() {
         base.OnStartAuthority();
@@ -36,8 +37,9 @@ public class Health : NetworkBehaviour {
     }
 
     [Server]
-    public void DealDamage(float damageAmount) {
+    public void DealDamage(float damageAmount, GameObject attacker) {
         currentHealth = Mathf.Max(currentHealth - damageAmount, 0);
+        ServerOnHealthUpdated?.Invoke(attacker, damageAmount);
 
         if (currentHealth == 0) {
             NetworkServer.Destroy(gameObject);

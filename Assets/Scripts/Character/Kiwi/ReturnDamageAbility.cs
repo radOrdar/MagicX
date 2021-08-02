@@ -1,21 +1,24 @@
-using Mirror;
 using UnityEngine;
 
 public class ReturnDamageAbility : BaseDurationAbility {
-    [ServerCallback]
-    private void OnTriggerEnter2D(Collider2D other) {
+    private Health myHealth;
+
+    public override void OnStartServer() {
+        base.OnStartServer();
+        myHealth = GetComponent<Health>();
+        myHealth.ServerOnHealthUpdated += HandleServerHealthUpdated;
+    }
+
+    public override void OnStopServer() {
+        base.OnStopServer();
+        myHealth.ServerOnHealthUpdated -= HandleServerHealthUpdated;
+    }
+
+    private void HandleServerHealthUpdated(GameObject obj, float dmg) {
         if (!IsActive) { return; }
 
-        if (other.TryGetComponent(out NetworkIdentity identity)) {
-            if (identity.connectionToClient == connectionToClient) {
-                return;
-            }
-        }
-
-        if (!other.TryGetComponent(out IDamageable damageable)) { return; }
-
-        if (damageable.GetOwner().TryGetComponent(out Health health)) {
-            health.DealDamage(damageable.GetDamage());
+        if (obj.TryGetComponent(out Health health)) {
+            health.DealDamage(dmg, gameObject);
         }
     }
 }
