@@ -102,10 +102,10 @@ public abstract class BaseCharacterMovement : NetworkBehaviour {
     }
 
     private bool IsGrounded() {
-        float extra = .1f;
+        float extra = .01f;
         var bounds = myCollider.bounds;
         RaycastHit2D hit = Physics2D.BoxCast(bounds.center, new Vector2(bounds.size.x + 2 * extra, bounds.size.y),
-            0f, Vector2.down, bounds.extents.y + extra, groundLayerMask);
+            0f, Vector2.down, extra, groundLayerMask);
         return hit.collider != null;
     }
 

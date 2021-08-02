@@ -630,9 +630,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  characterMovement: {fileID: -1580607743569591321}
-  characterShooting: {fileID: 8199482182330946248}
-  characterInputAsset: {fileID: -7275830628763446323}
 --- !u!114 &8199482182330946248
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -648,16 +645,16 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.02
   dmgBullet: 20
-  projSpeed: 30
   coolDownTime: 3
   bulletsPool: 2
   spawnProjTrans: {fileID: 5014805027652582736}
-  pfDefaultBullet: {fileID: 8779774710099683455, guid: 0dc2297b6afe2024e8c91717c80a72a3, type: 3}
   handAndGunToRotate: {fileID: 7250171379588898900}
   magazineReloadIndicator: {fileID: 8320704364709026362}
   bulletIndicatorPanel: {fileID: 8586783610800513807}
   bulletIndicator: {fileID: 6516285581933829735, guid: 06a8c0cff43c1e143a6809147cfc55bd, type: 3}
   shootEffect: {fileID: 8841763617714611668}
+  pfDefaultBullet: {fileID: 8779774710099683455, guid: 0dc2297b6afe2024e8c91717c80a72a3, type: 3}
+  projSpeed: 30
 --- !u!114 &7650941945282824051
 MonoBehaviour:
   m_ObjectHideFlags: 0
