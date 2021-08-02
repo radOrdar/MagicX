@@ -18,7 +18,7 @@ public class ReturnDamageAbility : BaseDurationAbility {
         if (!IsActive) { return; }
 
         if (obj.TryGetComponent(out Health health)) {
-            health.DealDamage(dmg, gameObject);
+            health.DealDamage(dmg, new GameObject());
         }
     }
 }
