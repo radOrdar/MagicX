@@ -437,7 +437,7 @@ SpriteRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 8924338580397356177, guid: fe7f37404e8678a4094f9b2ef134a276, type: 3}
-  m_Color: {r: 1, g: 0.3066038, b: 0.3066038, a: 1}
+  m_Color: {r: 0.084905684, g: 0.050863314, b: 0.050863314, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -609,7 +609,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.03
-  maxHealth: 100
+  maxHealth: 85
 --- !u!114 &-6313955724757140186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -811,7 +811,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   dmgBullet: 40
-  coolDownTime: 3
+  coolDownTime: 10
   bulletsPool: 1
   spawnProjTrans: {fileID: 5014805027652582736}
   handAndGunToRotate: {fileID: 7250171379588898900}
@@ -820,6 +820,7 @@ MonoBehaviour:
   bulletIndicator: {fileID: 6516285581933829735, guid: b8e3ce3dd74accc4e9b18a9d365b86f7, type: 3}
   shootEffect: {fileID: 8841763617714611668}
   lineRenderer: {fileID: 6088677282639731444}
+  impulseOnCollisionMultiplier: 200
 --- !u!114 &7976192471341011539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -864,7 +865,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  coolDownTime: 10
+  coolDownTime: 20
   cooldownIndicator: {fileID: 8974298920442822930}
 --- !u!114 &323011907032385079
 MonoBehaviour:
@@ -880,9 +881,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  coolDownTime: 3
+  coolDownTime: 5
   cooldownIndicator: {fileID: 5578633891183170764}
-  shiftForce: 100
+  shiftForce: 50
 --- !u!1 &4318615224766900644
 GameObject:
   m_ObjectHideFlags: 0

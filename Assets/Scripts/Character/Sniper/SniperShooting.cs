@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SniperShooting : BaseCharacterShooting {
     [SerializeField] private LineRenderer lineRenderer;
+    [SerializeField] private float impulseOnCollisionMultiplier;
 
     protected override void Shoot() {
         if (ShootInputVal == InputType.Canceled) {
@@ -20,6 +21,13 @@ public class SniperShooting : BaseCharacterShooting {
 
         if (hit.collider.TryGetComponent(out Health health)) {
             health.DealDamage(dmgBullet, gameObject);
+        }
+
+        if (hit.collider.CompareTag("Floor")) {
+            if (hit.collider.TryGetComponent(out Rigidbody2D otherRb)) {
+                // otherRb.AddForceAtPosition(transform.right * rb.mass * impulseOnCollisionMultiplier, closestPoint);
+                otherRb.AddForce(spawnProjTrans.right * impulseOnCollisionMultiplier, ForceMode2D.Impulse);
+            }
         }
 
         ShowLineOnShoot(shootPos, hit.point);

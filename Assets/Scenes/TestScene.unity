@@ -2976,7 +2976,7 @@ PrefabInstance:
     - target: {fileID: 2718470444320003560, guid: 2a031ee7aa9c0c043aa6d2485a376446, type: 3}
       propertyPath: playerPrefab
       value: 
-      objectReference: {fileID: 3784154246906092538, guid: e93e9f083ea82c04cb87dc0f34501964, type: 3}
+      objectReference: {fileID: 3784154246906092538, guid: eea305ccb9c27ff4398eb74bd9a4131e, type: 3}
     - target: {fileID: 2718470444320003562, guid: 2a031ee7aa9c0c043aa6d2485a376446, type: 3}
       propertyPath: m_Name
       value: NetManagerStub
