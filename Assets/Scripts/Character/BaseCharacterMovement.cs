@@ -3,11 +3,6 @@ using Mirror;
 using UnityEngine;
 
 public abstract class BaseCharacterMovement : NetworkBehaviour {
-    // [Header("Shift Params")]
-    // [SerializeField] private bool enableShiftCooldown;
-    // [SerializeField] private int shiftForce;
-    // [SerializeField] private int shiftCoolDown = 2;
-
     [Header("Movement params")]
     [SerializeField] private float moveSpeed;
     [SerializeField] private float jumpSpeed;
@@ -34,10 +29,6 @@ public abstract class BaseCharacterMovement : NetworkBehaviour {
 
     public float MoveInput { private get; set; }
     private bool isMoveDisabled;
-
-    // private bool shiftIsReady = true;
-    // private bool shiftInput;
-    // private int shiftDirectionSign; //1 or -1 (right or left)
 
     //TODO replace with flag mb?
     private Coroutine updateGroundRoutine;
@@ -140,32 +131,4 @@ public abstract class BaseCharacterMovement : NetworkBehaviour {
         yield return new WaitForSeconds(duration);
         jumpSpeedMultiplier = 1;
     }
-
-    // private IEnumerator ShiftCooldownCoroutine() {
-    //     yield return new WaitForSeconds(shiftCoolDown);
-    //     shiftIsReady = true;
-    // }
-    // public void UpdateShiftInput(bool newShiftInput, int newShiftSign) {
-    //     shiftInput = newShiftInput;
-    //     shiftDirectionSign = newShiftSign;
-    // }
-    //
-    // private IEnumerator EnableMovementCoroutine() {
-    //     yield return new WaitForSeconds(.1f);
-    //     isMoveDisabled = false;
-    // }
-
-
-    // private void Shift() {
-    //     if (!shiftInput || !shiftIsReady) { return; }
-    //
-    //     isMoveDisabled = true;
-    //     shiftInput = false;
-    //     myRigidbody.AddForce(new Vector2(shiftForce * shiftDirectionSign, 0), ForceMode2D.Impulse);
-    //     StartCoroutine(EnableMovementCoroutine());
-    //     if (enableShiftCooldown) {
-    //         shiftIsReady = false;
-    //         StartCoroutine(ShiftCooldownCoroutine());
-    //     }
-    // }
 }

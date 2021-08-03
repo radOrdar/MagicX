@@ -16,7 +16,8 @@ public class FastReloadShootAbility : BaseCooldownAbility {
     protected override void CmdActivate() {
         if (sniperShooting.CurrentBullets > 0) { return; }
 
+        UseAllBaseRoutines();
+
         sniperShooting.StopReloadMagazineRoutine();
-        base.CmdActivate();
     }
 }

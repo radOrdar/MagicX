@@ -9,7 +9,7 @@ public abstract class BaseCooldownAbility : NetworkBehaviour {
 
     public InputType InputVal { protected get; set; }
 
-    [SyncVar] private bool isReady = true;
+    [SyncVar] protected bool isReady = true;
 
     [ClientCallback]
     private void Update() {
@@ -23,8 +23,6 @@ public abstract class BaseCooldownAbility : NetworkBehaviour {
 
     [Command]
     protected virtual void CmdActivate() {
-        if (!isReady) { return; }
-
         UseAllBaseRoutines();
     }
 

@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -2034446190231774929}
   - component: {fileID: 499126176131907656}
   - component: {fileID: -3175109217203225912}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: DamagerBlock
   m_TagString: Floor
   m_Icon: {fileID: 0}
