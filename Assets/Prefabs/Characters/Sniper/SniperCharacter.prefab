@@ -365,12 +365,12 @@ GameObject:
   - component: {fileID: -2935991866745565945}
   - component: {fileID: 1560548166}
   - component: {fileID: -3831304093267303437}
-  - component: {fileID: 2310289844811460809}
   - component: {fileID: 8238697204466934135}
   - component: {fileID: 7976192471341011539}
   - component: {fileID: -4525814815538113068}
   - component: {fileID: 2143853099350611561}
   - component: {fileID: 323011907032385079}
+  - component: {fileID: 2262907104821909321}
   m_Layer: 6
   m_Name: SniperCharacter
   m_TagString: Player
@@ -770,32 +770,6 @@ MonoBehaviour:
     m_DissipationMode: 2
     m_DissipationDistance: 1000
     m_PropagationSpeed: 343
---- !u!61 &2310289844811460809
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3784154246906092538}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 6200000, guid: ece04cd65f14b3a4a932a806cfa8b2cc, type: 2}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.101537704, y: -0.23807526}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.49, y: 0.41}
-    oldSize: {x: 3.5714285, y: 3.5714285}
-    newSize: {x: 5, y: 5}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.9911289, y: 1.7151923}
-  m_EdgeRadius: 0
 --- !u!114 &8238697204466934135
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -884,6 +858,22 @@ MonoBehaviour:
   coolDownTime: 5
   cooldownIndicator: {fileID: 5578633891183170764}
   shiftForce: 50
+--- !u!70 &2262907104821909321
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3784154246906092538}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: ece04cd65f14b3a4a932a806cfa8b2cc, type: 2}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.09703255, y: -0.22509551}
+  m_Size: {x: 0.99446106, y: 1.7708526}
+  m_Direction: 0
 --- !u!1 &4318615224766900644
 GameObject:
   m_ObjectHideFlags: 0

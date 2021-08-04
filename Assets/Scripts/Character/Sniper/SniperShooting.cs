@@ -48,7 +48,7 @@ public class SniperShooting : BaseCharacterShooting {
         lineRenderer.SetPosition(0, start);
         lineRenderer.SetPosition(1, end);
         lineRenderer.enabled = true;
-        yield return new WaitForSeconds(.01f);
+        yield return new WaitForSeconds(.02f);
         lineRenderer.enabled = false;
     }
 

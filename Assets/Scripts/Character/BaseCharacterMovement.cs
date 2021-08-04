@@ -20,7 +20,7 @@ public abstract class BaseCharacterMovement : NetworkBehaviour {
     private void Start() {
         myRb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        myCollider = GetComponent<BoxCollider2D>();
+        myCollider = GetComponent<Collider2D>();
         groundLayerMask = LayerMask.GetMask("Floor");
     }
 
@@ -93,10 +93,10 @@ public abstract class BaseCharacterMovement : NetworkBehaviour {
     }
 
     private bool IsGrounded() {
-        float extra = .01f;
+        float extra = .05f;
         var bounds = myCollider.bounds;
-        RaycastHit2D hit = Physics2D.BoxCast(bounds.center, new Vector2(bounds.size.x + 2 * extra, bounds.size.y),
-            0f, Vector2.down, extra, groundLayerMask);
+        RaycastHit2D hit = Physics2D.BoxCast(bounds.center, new Vector2(bounds.size.x + extra, bounds.size.y + extra),
+            0f, Vector2.down, 0, groundLayerMask);
         return hit.collider != null;
     }
 

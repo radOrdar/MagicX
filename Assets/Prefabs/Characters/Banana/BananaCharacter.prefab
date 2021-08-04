@@ -391,7 +391,7 @@ GameObject:
   - component: {fileID: -2935991866745565945}
   - component: {fileID: 1560548166}
   - component: {fileID: -3831304093267303437}
-  - component: {fileID: 958989493333421860}
+  - component: {fileID: 6797503155262844511}
   m_Layer: 6
   m_Name: BananaCharacter
   m_TagString: Player
@@ -899,8 +899,8 @@ MonoBehaviour:
     m_DissipationMode: 2
     m_DissipationDistance: 1000
     m_PropagationSpeed: 343
---- !u!61 &958989493333421860
-BoxCollider2D:
+--- !u!70 &6797503155262844511
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -912,19 +912,9 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.24561119, y: -0.21191505}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.59, y: 0.47}
-    oldSize: {x: 3.3333333, y: 3.3333333}
-    newSize: {x: 5, y: 5}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.722641, y: 2.0263395}
-  m_EdgeRadius: 0
+  m_Offset: {x: 0.33830976, y: -0.2064836}
+  m_Size: {x: 0.8924093, y: 2.0636153}
+  m_Direction: 0
 --- !u!1 &4445742092652970047
 GameObject:
   m_ObjectHideFlags: 0
