@@ -1,7 +1,7 @@
 using Mirror;
 using UnityEngine;
 
-public class DamagerPlatform : MonoBehaviour {
+public class ContactDamager : MonoBehaviour {
     [SerializeField] private int damagePerSecondToDeal = 30;
 
     [ServerCallback]
