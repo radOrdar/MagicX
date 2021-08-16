@@ -794,7 +794,7 @@ MonoBehaviour:
   bulletIndicator: {fileID: 6516285581933829735, guid: b8e3ce3dd74accc4e9b18a9d365b86f7, type: 3}
   shootEffect: {fileID: 8841763617714611668}
   lineRenderer: {fileID: 6088677282639731444}
-  impulseOnCollisionMultiplier: 200
+  impulseOnCollisionMultiplier: 500
 --- !u!114 &7976192471341011539
 MonoBehaviour:
   m_ObjectHideFlags: 0
