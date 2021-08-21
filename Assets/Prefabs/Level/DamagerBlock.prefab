@@ -187,7 +187,7 @@ MonoBehaviour:
   interpolatePosition: 1
   interpolateRotation: 1
   interpolateScale: 0
-  syncScale: 1
+  syncScale: 0
 --- !u!114 &-3175109217203225912
 MonoBehaviour:
   m_ObjectHideFlags: 0

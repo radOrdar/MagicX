@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 public class DashAbility : BaseCooldownAbility {
@@ -18,13 +17,7 @@ public class DashAbility : BaseCooldownAbility {
     }
 
     private void Shift() {
-        StartCoroutine(nameof(DisableMoveRoutine));
+        characterMovement.DisableMovement(.1f);
         rb.AddForce(transform.right * (shiftForce * transform.localScale.x), ForceMode2D.Impulse);
-    }
-
-    private IEnumerator DisableMoveRoutine() {
-        characterMovement.enabled = false;
-        yield return new WaitForSeconds(.1f);
-        characterMovement.enabled = true;
     }
 }

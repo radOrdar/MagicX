@@ -954,7 +954,7 @@ MonoBehaviour:
   - {fileID: 1943211514}
   selectedLevelText: {fileID: 1555513031}
   levelSelectionPanel: {fileID: 1741742523}
-  numOfGameLevels: 11
+  numOfGameLevels: 12
 --- !u!1 &402243920
 GameObject:
   m_ObjectHideFlags: 0
@@ -1407,7 +1407,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2909861333191554970, guid: 48642c4aaa267354db551c70d7a2e84a, type: 3}
       propertyPath: spawnPrefabs.Array.size
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 2909861333191554970, guid: 48642c4aaa267354db551c70d7a2e84a, type: 3}
       propertyPath: spawnPrefabs.Array.data[5]
@@ -1417,6 +1417,10 @@ PrefabInstance:
       propertyPath: spawnPrefabs.Array.data[6]
       value: 
       objectReference: {fileID: 3784154246906092538, guid: eea305ccb9c27ff4398eb74bd9a4131e, type: 3}
+    - target: {fileID: 2909861333191554970, guid: 48642c4aaa267354db551c70d7a2e84a, type: 3}
+      propertyPath: spawnPrefabs.Array.data[7]
+      value: 
+      objectReference: {fileID: 311588867846855754, guid: 2cb30ac7b0bd2fb4999d512d88934380, type: 3}
     - target: {fileID: 2909861333191554972, guid: 48642c4aaa267354db551c70d7a2e84a, type: 3}
       propertyPath: m_Enabled
       value: 0

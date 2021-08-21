@@ -17,18 +17,20 @@ public abstract class BaseCharacterMovement : NetworkBehaviour {
     private Collider2D myCollider;
     private Animator animator;
 
+    public bool JumpInput { private get; set; }
+    private int jumpCounter;
+
+    public float MoveInput { private get; set; }
+
+    private bool isMoveDisabled;
+    private Coroutine disableMovementRoutine;
+
     private void Start() {
         myRb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         myCollider = GetComponent<Collider2D>();
         groundLayerMask = LayerMask.GetMask("Floor");
     }
-
-    public bool JumpInput { private get; set; }
-    private int jumpCounter;
-
-    public float MoveInput { private get; set; }
-    private bool isMoveDisabled;
 
     //TODO replace with flag mb?
     private Coroutine updateGroundRoutine;
@@ -37,6 +39,7 @@ public abstract class BaseCharacterMovement : NetworkBehaviour {
     private void OnCollisionEnter2D(Collision2D other) {
         if (!hasAuthority) { return; }
 
+        isMoveDisabled = false;
         if (other.collider.CompareTag("Floor")) {
             jumpCounter = 0;
             animator.SetTrigger("Land");
@@ -130,5 +133,21 @@ public abstract class BaseCharacterMovement : NetworkBehaviour {
         jumpSpeedMultiplier = multiplier;
         yield return new WaitForSeconds(duration);
         jumpSpeedMultiplier = 1;
+    }
+
+    public void DisableMovement(float duration) {
+        disableMovementRoutine = StartCoroutine(DisableMovementRoutine(duration));
+    }
+
+    public void StopDisablingMovementRoutine() {
+        if (disableMovementRoutine != null) {
+            StopCoroutine(disableMovementRoutine);
+        }
+    }
+
+    private IEnumerator DisableMovementRoutine(float duration) {
+        isMoveDisabled = true;
+        yield return new WaitForSeconds(duration);
+        isMoveDisabled = false;
     }
 }

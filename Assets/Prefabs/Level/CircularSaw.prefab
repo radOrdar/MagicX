@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3937795580349635445}
   - component: {fileID: 3937795580349635434}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Square (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3937795580608190191}
   - component: {fileID: 3937795580608190188}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,7 +178,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3937795580856760023}
   - component: {fileID: 3937795580856760020}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Square (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -260,7 +260,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3937795581166107440}
   - component: {fileID: 3937795581166107441}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Square (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -342,7 +342,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3937795581309785325}
   - component: {fileID: 3937795581309785314}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Square (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -426,7 +426,7 @@ GameObject:
   - component: {fileID: 3937795581515406079}
   - component: {fileID: 3937795581515406078}
   - component: {fileID: 4515526772416117630}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CircularSaw
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -457,7 +457,7 @@ CircleCollider2D:
   m_GameObject: {fileID: 3937795581515406073}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: ece04cd65f14b3a4a932a806cfa8b2cc, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -476,7 +476,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6eb017f51bf1b44d807acb753f982b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 360
+  rotationSpeed: 1000
 --- !u!114 &4515526772416117630
 MonoBehaviour:
   m_ObjectHideFlags: 0
