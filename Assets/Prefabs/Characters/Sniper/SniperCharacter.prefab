@@ -689,7 +689,7 @@ MonoBehaviour:
   clientAuthority: 1
   syncVelocity: 1
   clearVelocity: 0
-  velocitySensitivity: 0.1
+  velocitySensitivity: 0.05
   syncAngularVelocity: 0
   clearAngularVelocity: 0
   angularVelocitySensitivity: 0.1

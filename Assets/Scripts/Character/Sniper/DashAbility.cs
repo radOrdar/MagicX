@@ -17,7 +17,7 @@ public class DashAbility : BaseCooldownAbility {
     }
 
     private void Shift() {
-        characterMovement.DisableMovement(.1f);
+        characterMovement.RpcDisableMovement(.1f);
         rb.AddForce(transform.right * (shiftForce * transform.localScale.x), ForceMode2D.Impulse);
     }
 }

@@ -135,11 +135,13 @@ public abstract class BaseCharacterMovement : NetworkBehaviour {
         jumpSpeedMultiplier = 1;
     }
 
-    public void DisableMovement(float duration) {
+    [ClientRpc]
+    public void RpcDisableMovement(float duration) {
         disableMovementRoutine = StartCoroutine(DisableMovementRoutine(duration));
     }
 
-    public void StopDisablingMovementRoutine() {
+    [ClientRpc]
+    public void RpcStopDisablingMovementRoutine() {
         if (disableMovementRoutine != null) {
             StopCoroutine(disableMovementRoutine);
         }
@@ -149,5 +151,15 @@ public abstract class BaseCharacterMovement : NetworkBehaviour {
         isMoveDisabled = true;
         yield return new WaitForSeconds(duration);
         isMoveDisabled = false;
+    }
+
+    [ClientRpc]
+    public void RpcAddForce(Vector2 force) {
+        myRb.AddForce(force, ForceMode2D.Impulse);
+    }
+
+    [ClientRpc]
+    public void RpcMovePosition(Vector2 pos) {
+        myRb.MovePosition(pos);
     }
 }

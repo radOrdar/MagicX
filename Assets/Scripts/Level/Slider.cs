@@ -2,7 +2,7 @@ using Mirror;
 using UnityEngine;
 
 public class Slider : MonoBehaviour {
-    [SerializeField] private float force;
+    [SerializeField] private float forcePerMass;
     [SerializeField] private LeftOrRight leftOrRight = LeftOrRight.Right;
 
     private Vector3 direction;
@@ -25,18 +25,24 @@ public class Slider : MonoBehaviour {
 
     [ServerCallback]
     private void OnCollisionStay2D(Collision2D other) {
-        if (!other.collider.CompareTag("Player")) { return; }
-
-        other.gameObject.GetComponent<Rigidbody2D>().MovePosition(other.transform.position + direction * .3f);
-        Debug.Log("stay");
+        if (other.collider.TryGetComponent(out BaseCharacterMovement bs)) {
+            bs.RpcMovePosition(other.transform.position + direction * .3f);
+        } else if (other.collider.TryGetComponent(out Rigidbody2D rb)) {
+            rb.MovePosition(other.transform.position + direction * .3f);
+        }
     }
 
     [ServerCallback]
     private void OnCollisionExit2D(Collision2D other) {
-        other.gameObject.GetComponent<Rigidbody2D>().AddForce(force * direction, ForceMode2D.Impulse);
-        var baseCharacterMovement = other.gameObject.GetComponent<BaseCharacterMovement>();
-        baseCharacterMovement.StopDisablingMovementRoutine();
-        baseCharacterMovement.DisableMovement(2f);
+        if (!other.collider.TryGetComponent(out Rigidbody2D rb)) { return; }
+
+        if (other.gameObject.TryGetComponent(out BaseCharacterMovement baseCharacterMovement)) {
+            baseCharacterMovement.RpcStopDisablingMovementRoutine();
+            baseCharacterMovement.RpcDisableMovement(2f);
+            baseCharacterMovement.RpcAddForce(forcePerMass * rb.mass * direction);
+        } else {
+            rb.AddForce(forcePerMass * rb.mass * direction, ForceMode2D.Impulse);
+        }
     }
 
     enum LeftOrRight {
