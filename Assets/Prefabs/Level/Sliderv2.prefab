@@ -237,5 +237,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a56933063465dcf4081ba3ca571e6005, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forcePerMass: 40
+  forcePerMass: 25
   leftOrRight: 1
