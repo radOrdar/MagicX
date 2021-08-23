@@ -453,6 +453,8 @@ GameObject:
   - component: {fileID: 1560548166}
   - component: {fileID: -3831304093267303437}
   - component: {fileID: 9111427110311215448}
+  - component: {fileID: 7210244920978285276}
+  - component: {fileID: 6946863413757172079}
   m_Layer: 6
   m_Name: KiwiCharacter
   m_TagString: Player
@@ -965,6 +967,42 @@ CapsuleCollider2D:
   m_Offset: {x: 0.09739828, y: -0.23573667}
   m_Size: {x: 1.0053606, y: 1.740333}
   m_Direction: 0
+--- !u!58 &7210244920978285276
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3784154246906092538}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 1
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.10202587, y: 0.0040808916}
+  serializedVersion: 2
+  m_Radius: 1.6009895
+--- !u!250 &6946863413757172079
+PointEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3784154246906092538}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 64
+  m_ForceMagnitude: 100
+  m_ForceVariation: 0
+  m_DistanceScale: 1
+  m_ForceSource: 0
+  m_ForceTarget: 0
+  m_ForceMode: 0
+  m_Drag: 0
+  m_AngularDrag: 0
 --- !u!1 &3845269827280760740
 GameObject:
   m_ObjectHideFlags: 0

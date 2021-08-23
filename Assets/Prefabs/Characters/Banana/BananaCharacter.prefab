@@ -392,6 +392,8 @@ GameObject:
   - component: {fileID: 1560548166}
   - component: {fileID: -3831304093267303437}
   - component: {fileID: 6797503155262844511}
+  - component: {fileID: 595903438463894792}
+  - component: {fileID: 4472522642939368532}
   m_Layer: 6
   m_Name: BananaCharacter
   m_TagString: Player
@@ -915,6 +917,42 @@ CapsuleCollider2D:
   m_Offset: {x: 0.33830976, y: -0.2064836}
   m_Size: {x: 0.8924093, y: 2.0636153}
   m_Direction: 0
+--- !u!58 &595903438463894792
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3784154246906092538}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 1
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.30000007, y: 0.100000024}
+  serializedVersion: 2
+  m_Radius: 1.6666666
+--- !u!250 &4472522642939368532
+PointEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3784154246906092538}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 64
+  m_ForceMagnitude: 100
+  m_ForceVariation: 0
+  m_DistanceScale: 1
+  m_ForceSource: 0
+  m_ForceTarget: 0
+  m_ForceMode: 0
+  m_Drag: 0
+  m_AngularDrag: 0
 --- !u!1 &4445742092652970047
 GameObject:
   m_ObjectHideFlags: 0
