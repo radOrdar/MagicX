@@ -17,7 +17,7 @@ public class ReturnDamageAbility : BaseDurationAbility {
     private void HandleServerHealthUpdated(GameObject obj, float dmg) {
         if (!IsActive) { return; }
 
-        if (obj.TryGetComponent(out Health health)) {
+        if (obj != null && obj.TryGetComponent(out Health health)) {
             health.DealDamage(dmg, new GameObject());
         }
     }

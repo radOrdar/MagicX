@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7275343702787046542}
   - component: {fileID: 7275343702787046540}
   m_Layer: 0
-  m_Name: BlockDamagerSpawner
+  m_Name: CeilSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
