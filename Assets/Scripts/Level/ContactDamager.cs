@@ -5,8 +5,8 @@ public class ContactDamager : MonoBehaviour {
     [SerializeField] private int damagePerSecondToDeal = 30;
 
     [ServerCallback]
-    private void OnCollisionStay2D(Collision2D other) {
-        if (other.gameObject.TryGetComponent(out Health health)) {
+    private void OnTriggerStay2D(Collider2D other) {
+        if (other.TryGetComponent(out Health health)) {
             health.DealDamage(damagePerSecondToDeal * Time.deltaTime, gameObject);
         }
     }

@@ -16,7 +16,7 @@ TagManager:
   - Floor
   - Projectile
   - LevelSpawnable
-  - 
+  - WithPlayerOnly
   - 
   - 
   - 
@@ -47,4 +47,7 @@ TagManager:
     locked: 0
   - name: Effect
     uniqueID: 2475621901
+    locked: 0
+  - name: Immersive
+    uniqueID: 4283561973
     locked: 0
